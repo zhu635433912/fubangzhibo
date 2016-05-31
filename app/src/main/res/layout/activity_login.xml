@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fubang.fubangzhibo.ui.LoginActivity">
+    <RelativeLayout
+        android:id="@+id/login_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center" >
+        <FrameLayout
+            android:id="@+id/username_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:gravity="center" >
+            <EditText
+                android:id="@+id/login_username"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:inputType="number"
+                android:paddingRight="60dp"
+                android:maxLength="20"
+                android:paddingLeft="55dp" >
+            </EditText>
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="left|"
+                android:background="@mipmap/image_account"
+                android:visibility="visible" />
+            <TextView
+                android:id="@+id/contry_sn"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="+62"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/bt_username_clear"
+                android:layout_marginTop="8dp"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:background="@mipmap/image_error"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                />
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/usercode_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/username_layout"
+            android:layout_marginTop="6dp"
+            android:gravity="center" >
+            <EditText
+                android:id="@+id/login_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:paddingRight="60dp"
+            android:maxLength="20"
+            android:paddingLeft="55dp" >
+        </EditText>
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="7dp"
+            android:layout_gravity="left"
+            android:background="@android:drawable/ic_lock_lock" />
+
+        <Button
+            android:id="@+id/bt_pwd_clear"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/image_error"
+            android:layout_gravity="right|center_vertical"
+            />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/login_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/usercode_layout"
+        android:layout_marginTop="30dp"
+        android:background="#ff336699"
+        android:textColor="@android:color/white"
+
+        android:gravity="center"
+        android:text="登录" />
+    <ImageView
+        android:layout_below="@id/login_login"
+        android:id="@+id/login_qq_image"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:src="@mipmap/btn_qq_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--app:roundAsCircle="true"-->
+        <!--app:placeholderImage="@mipmap/image_about_backage"-->
+        <!--android:id="@+id/login_qq_icon"/>-->
+    <!--<TextView-->
+        <!--android:text=""-->
+        <!--android:layout_toRightOf="@id/login_qq_icon"-->
+        <!--android:id="@+id/login_qq_name"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+</RelativeLayout>
+</RelativeLayout>

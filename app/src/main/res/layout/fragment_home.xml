@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.fubang.fubangzhibo.fragment.HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <include layout="@layout/widget_home_head_layout"/>
+
+    <android.support.design.widget.TabLayout
+        android:background="@color/home_tab_backgroud"
+        android:id="@+id/home_tablayout"
+        app:tabTextColor="@color/bottom_radio_text"
+        app:tabIndicatorColor="@color/bottom_radio_checked_text"
+        app:tabSelectedTextColor="@color/bottom_radio_checked_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_tab_height"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

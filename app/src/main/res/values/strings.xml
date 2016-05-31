@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">fubangzhibo</string>
+    <string name="bottom_radio_head">首页</string>
+    <string name="bottom_radio_direct">直播</string>
+    <string name="bottom_radio_look">关注</string>
+    <string name="bottom_radio_mine">我的</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_cache_text">当前缓存：111MB</string>
+    <string name="user_clear_cache">清除图片缓存</string>
+    <string name="user_recommed_friend">推荐给朋友</string>
+    <string name="user_check_version">检查新版本</string>
+    <string name="user_now_verson">当前版本1.0.0</string>
+    <string name="search_find">搜索</string>
+    <string name="chat_send">发送</string>
+</resources>

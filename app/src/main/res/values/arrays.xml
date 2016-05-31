@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="guide_pic">
+        <item>@mipmap/guide_1</item>
+        <item>@mipmap/guide_2</item>
+        <item>@mipmap/guide_3</item>
+        <item>@mipmap/guide_4</item>
+    </array>
+</resources>

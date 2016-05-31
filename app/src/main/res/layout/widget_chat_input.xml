@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/chat_input_backgd"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activity_chat_input">
+    <ImageButton
+        android:id="@+id/chat_image_btn"
+        android:src="@mipmap/icon_smile_hover"
+        android:background="@color/chat_input_backgd"
+        android:layout_width="50dp"
+        android:layout_height="match_parent" />
+
+<RelativeLayout
+    android:layout_weight="1"
+    android:layout_gravity="center"
+    android:layout_width="0dp"
+    android:layout_height="30dp">
+
+    <View
+        android:id="@+id/view"
+        android:focusable ="true"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background = "#fffef9"
+        />
+    <com.fubang.fubangzhibo.view.MyEditText
+        android:id="@+id/room_chat_edittext"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background = "#00000000"
+    />
+
+</RelativeLayout>
+    <android.support.v7.widget.CardView
+        android:layout_gravity="center"
+        app:cardCornerRadius="10dp"
+        android:layout_width="60dp"
+        android:layout_height="35dp">
+        <Button
+            android:id="@+id/room_chat_send"
+            android:text="@string/chat_send"
+            android:background="@color/home_tab_backgroud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.CardView>
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/room_gift"
+        android:src="@mipmap/qiqi_message_view_gift_normal"
+        android:layout_width="35dp"
+        android:layout_height="35dp" />
+</LinearLayout>
