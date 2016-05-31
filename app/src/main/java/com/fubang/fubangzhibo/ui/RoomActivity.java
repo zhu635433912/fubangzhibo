@@ -115,7 +115,6 @@ public class RoomActivity extends BaseActivity implements  MicNotify, RoomHandle
                 try {
                     Thread.sleep(1000 * 5);
                     getChannel().SendKeepAliveReq();
-//                    getChannel().sendChatMsg(0,(byte)0,(byte)0,"<FONT style=\"FONT-FAMILY:宋体;FONT-SIZE:14px; COLOR:#000000\">test</FONT>");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
