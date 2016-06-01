@@ -35,15 +35,12 @@ public class HomeRoomAdapter extends ListBaseAdapter<RoomListEntity>{
     }
     @Override
     public int getCount() {
-        return list != null ? list.size() + 1 : 0;
+        return list != null ? list.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        if (position == 0)
-            return list.get(0);
-        else
-            return list.get(position - 1);
+        return list.get(position);
     }
 
     @Override
@@ -60,21 +57,22 @@ public class HomeRoomAdapter extends ListBaseAdapter<RoomListEntity>{
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
-        if (position == 0){
-//            holder.simpleDraweeView.setVisibility(View.GONE);
-            holder.roomLayout.setVisibility(View.GONE);
-        }else {
-            holder.simpleDraweeView.setImageURI(Uri.parse(list.get(position - 1).getRoompic()));
-            holder.roomNumber.setText(list.get(position - 1).getRscount() + "/" + list.get(position-1).getRoomrs());
-            holder.roomText.setText(list.get(position - 1).getRoomname());
+//        if (position == 0){
+////            holder.simpleDraweeView.setVisibility(View.GONE);
+////            holder.roomLayout.setVisibility(View.GONE);
+//        }else {
+            holder.simpleDraweeView.setImageURI(Uri.parse(list.get(position).getRoompic()));
+            holder.roomNumber.setText(list.get(position).getRscount() + "/" + list.get(position).getRoomrs());
+            holder.roomText.setText(list.get(position).getRoomname());
             holder.roomLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("123",position+"-----------------");
-                    context.startActivity(TestActivity_.intent(context).get());
+                    context.startActivity(TestActivity_.intent(context)
+                            .extra("roomIp",list.get(position).getGateway()).extra("roomId",list.get(position).getRoomid()).get());
                 }
             });
-        }
+//        }
         return convertView;
     }
 

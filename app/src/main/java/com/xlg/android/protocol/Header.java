@@ -21,6 +21,7 @@ public class Header {
 	public static final byte MessageType_mxpDoNotReachRoomServer = (byte)(6 + 2); // 8
 	public static final byte MessageType_mxpGetRoomUserListResponse = (byte)(6 + 4); // 10
 	public static final byte MessageType_mxpRoomUserNotify = (byte) (6 + 5); // 11
+	public static final byte MessageType_mxpKickoutRoomUserRequest = (byte)(6 + 6);//12
 	public static final byte MessageType_mxpKickoutRoomUserNotify = (byte)(6 + 9); // 15
 	public static final byte MessageType_mxpGetFlygiftListResponse = (byte)(6 + 10); // 16
 	public static final byte MessageType_mxpChatMsgRequest = (byte)(6 + 11); // 17

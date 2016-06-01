@@ -74,7 +74,10 @@ public class RoomChatAdapter extends ListBaseAdapter<RoomChatMsg> {
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
-        holder.userTv.setText(list.get(position).getSrcid()+":");
+        if (list.get(position).getIsprivate()==1){
+            holder.userTv.setText(list.get(position).getSrcid()+":悄悄的说");
+        }else
+            holder.userTv.setText(list.get(position).getSrcid()+":");
 //        holder.messageTv.setText(Html.fromHtml(list.get(position).getContent()));
         String spanned = String.valueOf(Html.fromHtml(list.get(position).getContent()));
         StringBuilder stringBuilder = new StringBuilder();

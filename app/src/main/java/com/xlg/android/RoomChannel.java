@@ -678,7 +678,7 @@ public class RoomChannel  implements ClientSocketHandler{
 		
 		obj.setVcbid(mRoomID);//房间ID
 		obj.setSrcid(mUserID);//发送者id
-		obj.setToid(0);//0表示房间大厅发送
+		obj.setToid(toid);//0表示房间大厅发送
 		obj.setDstvcbid(0);
 		obj.setSrcplatformid((short) 0);
 		obj.setDstplatformid((short) 0);
@@ -714,6 +714,17 @@ public class RoomChannel  implements ClientSocketHandler{
 		obj.setToalias(toid+"");
 		obj.setSztext("");
 		sendPack(header,obj);
-
+	}
+	//退出房间请求
+	public void sendLeaveRoom(int srcId){
+		Header header = new Header();
+		RoomKickoutUserInfo obj = new RoomKickoutUserInfo();
+		header.setCmd1(Header.MessageType_mxpKickoutRoomUserRequest);
+		obj.setSrcid(srcId);
+		obj.setToid(srcId);
+		obj.setReserve((byte)0);
+		obj.setReasonid((byte)0);
+		obj.setVcbid(mRoomID);
+		sendPack(header,obj);
 	}
 }

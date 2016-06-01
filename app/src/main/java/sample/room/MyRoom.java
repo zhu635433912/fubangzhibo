@@ -1,6 +1,5 @@
 package sample.room;
 
-import android.util.Log;
 
 import com.xlg.android.RoomChannel;
 import com.xlg.android.RoomHandler;
@@ -117,6 +116,7 @@ public class MyRoom implements RoomHandler {
 		// TODO Auto-generated method stub
 		System.out.println("onRoomUserNotify: ");
 		Tools.PrintObject(obj);
+		EventBus.getDefault().post(obj,"userList");
 	}
 
 	@Override
@@ -163,8 +163,10 @@ public class MyRoom implements RoomHandler {
 	public void onGetRoomUserListResponse(int g1, RoomUserInfo[] obj) {
 		// TODO Auto-generated method stub
 		System.out.println("onGetRoomUserListResponse: " + g1);
-		for(int i = 0; i < obj.length; i++) {
-			// Tools.PrintObject(obj[i]);
+		for(int i = 0; i < obj.length - 1; i++) {
+//			 Tools.PrintObject(obj[i]);
+//			Log.d("123",obj.length+"");
+			EventBus.getDefault().post(obj[i],"userList");
 			if(0 != (obj[i].getUserstate() & FT_ROOMUSER_STATUS_PUBLIC_MIC)) {
 				videoUID = obj[i].getUserid();
 				System.out.println("===================: find mic: " + videoUID);
@@ -210,6 +212,9 @@ public class MyRoom implements RoomHandler {
 	public void onKickoutRoomUserNotify(RoomKickoutUserInfo obj) {
 		// TODO Auto-generated method stub
 		PrintUnknown("onKickoutRoomUserNotify: ");
+		Tools.PrintObject(obj);
+		EventBus.getDefault().post(obj,"RoomKickoutUserInfo");
+
 	}
 
 	@Override

@@ -58,7 +58,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @EFragment(R.layout.fragment_home_item)
 public class HomeItemFragment extends BaseFragment implements RoomListView,PullToRefreshBase.OnRefreshListener2{
     @ViewById(R.id.home_ptlist)
-    PulltoRefreshHeadGridView ptRefreshGv;
+    PullToRefreshGridView ptRefreshGv;
     private String type ;
     private List<RoomListEntity> list = new ArrayList<>();
     private HomeRoomAdapter adapter;
@@ -67,9 +67,9 @@ public class HomeItemFragment extends BaseFragment implements RoomListView,PullT
     private int page = 1;
     private int group = 0;
 
-    private View headView;
-    private ConvenientBanner<String> chooseView;
-    private Call<BannerEntity> callFirst;
+//    private View headView;
+//    private ConvenientBanner<String> chooseView;
+//    private Call<BannerEntity> callFirst;
     private List<String> listFirst = new ArrayList<>();
     @Override
     public void before() {
@@ -82,22 +82,22 @@ public class HomeItemFragment extends BaseFragment implements RoomListView,PullT
         ptRefreshGv.setMode(PullToRefreshBase.Mode.BOTH);
         ptRefreshGv.setOnRefreshListener(this);
         //广告头
-        initView1();
+//        initView1();
         GridView gridView = new GridView(getContext());
         gridView.getAdapter();
     }
 
-    private void initView1() {
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        headView = inflater.inflate(R.layout.choose_head,null);
-        chooseView = (ConvenientBanner) headView.findViewById(R.id.choose_frag_viewpager);
-
-//        chooseRecycler = (RecyclerView) headView.findViewById(R.id.choose_frag_recycler);
-    }
+//    private void initView1() {
+//        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        headView = inflater.inflate(R.layout.choose_head,null);
+//        chooseView = (ConvenientBanner) headView.findViewById(R.id.choose_frag_viewpager);
+//
+////        chooseRecycler = (RecyclerView) headView.findViewById(R.id.choose_frag_recycler);
+//    }
 
     @Override
     public void initData() {
-        initData1();
+//        initData1();
         List<RoomListEntity> listEntities = DbUtil.getSession()
                     .getRoomListEntityDao()
                     .queryBuilder()
@@ -105,7 +105,7 @@ public class HomeItemFragment extends BaseFragment implements RoomListView,PullT
                     .list();
         list.addAll(listEntities);
         adapter = new HomeRoomAdapter(list,getContext());
-        ptRefreshGv.addHeaderView(headView);
+//        ptRefreshGv.addHeaderView(headView);
         ptRefreshGv.setAdapter(adapter);
         presenter.getRoomList();
 
@@ -138,60 +138,60 @@ public class HomeItemFragment extends BaseFragment implements RoomListView,PullT
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         ptRefreshGv.onRefreshComplete();
     }
-    private void initData1() {
-        if (callFirst != null)
-            callFirst.cancel();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(UrlConstants.BANNERS_FIRST_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        callFirst = retrofit.create(BannerService.class).getBannerList();
-        callFirst.enqueue(new Callback<BannerEntity>() {
-            @Override
-            public void onResponse(Call<BannerEntity> call, Response<BannerEntity> response) {
-                BannerEntity entity = response.body();
-                List<Banners> banners = entity.getBanners().getBanners();
-                listFirst.clear();
-                for (int i = 0; i < banners.size(); i++) {
-                    listFirst.add(banners.get(i).getImage_url());
-                }
-                chooseView.setPages(new CBViewHolderCreator<LocalImageHolderView>() {
-                    @Override
-                    public LocalImageHolderView createHolder() {
-                        return new LocalImageHolderView();
-                    }
-                },listFirst).setPageIndicator(new int[]{R.mipmap.ic_page_indicator,R.mipmap.ic_page_indicator_focused})
-                        .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
-                ;
-                chooseView.startTurning(2000);
-//                chooseView.setImageUris(listFirst);
-//                chooseView.setEffect(EffectConstants.CUBE_EFFECT);//更改图片切换的动画效果
-//                pageAdapter.notifyDataSetChanged();
-            }
+//    private void initData1() {
+//        if (callFirst != null)
+//            callFirst.cancel();
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(UrlConstants.BANNERS_FIRST_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        callFirst = retrofit.create(BannerService.class).getBannerList();
+//        callFirst.enqueue(new Callback<BannerEntity>() {
+//            @Override
+//            public void onResponse(Call<BannerEntity> call, Response<BannerEntity> response) {
+//                BannerEntity entity = response.body();
+//                List<Banners> banners = entity.getBanners().getBanners();
+//                listFirst.clear();
+//                for (int i = 0; i < banners.size(); i++) {
+//                    listFirst.add(banners.get(i).getImage_url());
+//                }
+//                chooseView.setPages(new CBViewHolderCreator<LocalImageHolderView>() {
+//                    @Override
+//                    public LocalImageHolderView createHolder() {
+//                        return new LocalImageHolderView();
+//                    }
+//                },listFirst).setPageIndicator(new int[]{R.mipmap.ic_page_indicator,R.mipmap.ic_page_indicator_focused})
+//                        .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT)
+//                ;
+//                chooseView.startTurning(2000);
+////                chooseView.setImageUris(listFirst);
+////                chooseView.setEffect(EffectConstants.CUBE_EFFECT);//更改图片切换的动画效果
+////                pageAdapter.notifyDataSetChanged();
+//            }
 
-            @Override
-            public void onFailure(Call<BannerEntity> call, Throwable t) {
-                t.printStackTrace();
-//                Toast.makeText(getActivity(), "网络问题", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-    public class LocalImageHolderView implements Holder<String> {
-        private SimpleDraweeView simpleDraweeView;
-        @Override
-        public View createView(Context context) {
-            simpleDraweeView = new SimpleDraweeView(context);
-            GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(getResources());
-            GenericDraweeHierarchy hierarchy = builder.build();
-            hierarchy.setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
-            simpleDraweeView.setHierarchy(hierarchy);
-            return simpleDraweeView;
-        }
-
-        @Override
-        public void UpdateUI(Context context, int position, String data) {
-            simpleDraweeView.setImageURI(Uri.parse(data));
-        }
-    }
+//            @Override
+//            public void onFailure(Call<BannerEntity> call, Throwable t) {
+//                t.printStackTrace();
+////                Toast.makeText(getActivity(), "网络问题", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
+//    public class LocalImageHolderView implements Holder<String> {
+//        private SimpleDraweeView simpleDraweeView;
+//        @Override
+//        public View createView(Context context) {
+//            simpleDraweeView = new SimpleDraweeView(context);
+//            GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(getResources());
+//            GenericDraweeHierarchy hierarchy = builder.build();
+//            hierarchy.setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
+//            simpleDraweeView.setHierarchy(hierarchy);
+//            return simpleDraweeView;
+//        }
+//
+//        @Override
+//        public void UpdateUI(Context context, int position, String data) {
+//            simpleDraweeView.setImageURI(Uri.parse(data));
+//        }
+//    }
 }

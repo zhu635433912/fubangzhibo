@@ -9,7 +9,7 @@ public class AppConstant {
     public static final String HOME_TYPE = "home_type";
     public static final String[] HOME_TYPE_TITLE = {"单身贵族","网络情缘","魅力舞台","明星点歌"};
     public static final String[] MY_TYPE_TITLE = {"关注主播","收藏房间","观看历史"};
-    public static final String BASE_URL = "http://115.231.26.180:405/index.php/app/";
+    public static final String BASE_URL = "http://115.231.26.180:8786/index.php/app/";
     public static final String VER = "ver";
     public static final String OS = "os";
     public static final String TIME = "time";
