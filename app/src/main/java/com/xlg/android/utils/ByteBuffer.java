@@ -20,7 +20,7 @@ public class ByteBuffer {
 			int size = (len + 1023) / 8 * 8;
 			mData = new byte[size];
 		} else if((mSize + len) >= mData.length) {
-			int size = (len + 1023) / 8 * 8;
+			int size = (mSize + len + 1023) / 8 * 8;
 			byte [] tmp = new byte[size];
 			
 			System.arraycopy(mData, 0, tmp, 0, mSize);

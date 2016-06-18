@@ -86,7 +86,7 @@ public class RoomChatAdapter extends ListBaseAdapter<RoomChatMsg> {
                 if (spanned.charAt(i)=='/'){
                     String s = spanned.substring(i+3,i+6);
                     int number = Integer.parseInt(s);
-                    if (number>0 && number <705) {
+                    if (number>0 && number <791) {
                         stringBuilder.append("<img src='");
                         stringBuilder.append(spanned.substring(i + 1, i + 6));
                         stringBuilder.append("'/>");

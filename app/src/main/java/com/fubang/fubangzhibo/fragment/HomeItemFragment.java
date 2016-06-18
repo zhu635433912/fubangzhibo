@@ -42,6 +42,7 @@ import com.handmark.pulltorefresh.library.PulltoRefreshHeadGridView;
 
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.simple.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,7 @@ public class HomeItemFragment extends BaseFragment implements RoomListView,PullT
     private List<String> listFirst = new ArrayList<>();
     @Override
     public void before() {
+        EventBus.getDefault().register(this);
         type = getArguments().getString(AppConstant.HOME_TYPE);
         presenter = new RoomListPresenterImpl(this,count,page,group);
     }
@@ -105,6 +107,7 @@ public class HomeItemFragment extends BaseFragment implements RoomListView,PullT
                     .list();
         list.addAll(listEntities);
         adapter = new HomeRoomAdapter(list,getContext());
+        EventBus.getDefault().post(list,"roomList");
 //        ptRefreshGv.addHeaderView(headView);
         ptRefreshGv.setAdapter(adapter);
         presenter.getRoomList();
@@ -138,7 +141,13 @@ public class HomeItemFragment extends BaseFragment implements RoomListView,PullT
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         ptRefreshGv.onRefreshComplete();
     }
-//    private void initData1() {
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    //    private void initData1() {
 //        if (callFirst != null)
 //            callFirst.cancel();
 //        Retrofit retrofit = new Retrofit.Builder()

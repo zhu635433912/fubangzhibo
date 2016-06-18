@@ -1,10 +1,11 @@
 package com.xlg.android.video;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
-
-import java.util.concurrent.ConcurrentLinkedQueue;
+import android.util.Log;
 
 public class AudioPlay {
 	private boolean isPlaying = false;
@@ -19,17 +20,29 @@ public class AudioPlay {
 	private AudioTrack audioTrack; // 音频播放类
 	private byte blockBuff[];
 	private byte adpcmBuff[];
+	private boolean isStop = false;
 
 	public AudioPlay() {
 
 	}
-
+	public void start(){
+		isStop = false;
+	}
 	/**
 	 * 开始播放
 	 */
 	public void play(byte[] head) {
-		audioTrack.write(head, 0, head.length);
-		audioTrack.flush();
+		if(false == isStop) {
+			try{
+				if (audioTrack != null) {
+					audioTrack.write(head, 0, head.length);
+					audioTrack.flush();
+				}
+			} catch(Exception e) {
+				System.out.println("onAudio play error:" + e.getMessage());
+				e.printStackTrace();
+			}
+		}
 	}
 
 
@@ -38,10 +51,14 @@ public class AudioPlay {
 	 * 停止播放
 	 */
 	public void stop() {
+		isStop = true;
 		if (null != audioTrack) {
+			Log.d("123","audioTrack----");
 			audioTrack.stop();
 			audioTrack.release();
 			audioTrack = null;
+			audioCycle = 0;
+			audioChannel = 0;
 		}
 	}
 	
@@ -49,6 +66,10 @@ public class AudioPlay {
 	 * 设置采样率
 	 */
 	public void setConfig(int sample, int channel) {
+		if(false != isStop) {
+			return;
+		}
+		
 		if(audioCycle == sample && audioChannel == channel) {
 			return;
 		}
@@ -62,12 +83,18 @@ public class AudioPlay {
 			audioTrack = null;
 		}
 		
-		int bufsize = audioCycle * 20;
-		audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
-				audioCycle,
-				(2==audioChannel)?AudioFormat.CHANNEL_CONFIGURATION_STEREO:AudioFormat.CHANNEL_CONFIGURATION_DEFAULT,
-				AudioFormat.ENCODING_PCM_16BIT, bufsize,
-				AudioTrack.MODE_STREAM);
-		audioTrack.play();
+		try{
+			int format = (2==audioChannel)?AudioFormat.CHANNEL_CONFIGURATION_STEREO:AudioFormat.CHANNEL_CONFIGURATION_DEFAULT;
+			int bufsize = AudioTrack.getMinBufferSize(audioCycle, audioChannel, format);// audioCycle * 20;
+			audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
+					audioCycle,
+					format,
+					AudioFormat.ENCODING_PCM_16BIT, bufsize,
+					AudioTrack.MODE_STREAM);
+			audioTrack.play();
+		} catch( Exception e) {
+			System.out.println("onAudio error: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }

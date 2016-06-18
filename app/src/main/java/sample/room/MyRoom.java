@@ -1,6 +1,8 @@
 package sample.room;
 
 
+import android.util.Log;
+
 import com.xlg.android.RoomChannel;
 import com.xlg.android.RoomHandler;
 import com.xlg.android.protocol.ActWaitMicUserInfo;
@@ -96,12 +98,13 @@ public class MyRoom implements RoomHandler {
 	@Override
 	public void onJoinRoomResponse(JoinRoomResponse obj) {
 		// TODO Auto-generated method stub
+		EventBus.getDefault().post(obj,"JoinRoomResponse");
 		System.out.println("onJoinRoomResponse: ");
-		// Tools.PrintObject(obj);
+		 Tools.PrintObject(obj);
 		String str = obj.getMediaserver();
 		String ips[] = str.split(";");
 		if(ips.length > 0) {
-			String s[] = ips[0].split(":");
+			String s[] = ips[1].split(":");
 			if(s.length > 1) {
 				videoIP = s[0];
 				videoPort = Integer.valueOf(s[1]).intValue();
@@ -165,12 +168,15 @@ public class MyRoom implements RoomHandler {
 		System.out.println("onGetRoomUserListResponse: " + g1);
 		for(int i = 0; i < obj.length - 1; i++) {
 //			 Tools.PrintObject(obj[i]);
-//			Log.d("123",obj.length+"");
+			Log.d("123",obj[i].getMicindex()+"----------micindex");
 			EventBus.getDefault().post(obj[i],"userList");
 			if(0 != (obj[i].getUserstate() & FT_ROOMUSER_STATUS_PUBLIC_MIC)) {
-				videoUID = obj[i].getUserid();
-				System.out.println("===================: find mic: " + videoUID);
-				mNotify.onMic(videoIP, videoPort, videoRand, videoUID);
+				if (obj[i].getMicindex() == 0) {
+					EventBus.getDefault().post(obj[i],"onMicUser");
+					videoUID = obj[i].getUserid();
+					System.out.println("===================: find mic: " + videoUID);
+					mNotify.onMic(videoIP, videoPort, videoRand, videoUID);
+				}
 			}
 		}
 	}
@@ -397,6 +403,7 @@ public class MyRoom implements RoomHandler {
 	public void onTradeGiftNotify(BigGiftRecord obj) {
 		// TODO Auto-generated method stub
 		PrintUnknown("onTradeGiftNotify: ");
+		Tools.PrintObject(obj);
 		EventBus.getDefault().post(obj,"BigGiftRecord");
 	}
 

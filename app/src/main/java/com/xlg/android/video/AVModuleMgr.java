@@ -19,11 +19,11 @@ public class AVModuleMgr {
 
     private native void _AddRTPRecver(int id, int recvertype, int ssrc, int pt, int jittertime);
     private native void _SetRTPRecverARQMode(int id, int ssrc, int pt, int buseARQ);
-    
+
 	static {
 		System.loadLibrary("avmodule");
 	}
-	
+
 	// 初始化
 	public void Init() {
 		_session = _Init();

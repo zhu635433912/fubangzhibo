@@ -42,8 +42,10 @@ public class LoginChannel  implements ClientSocketHandler{
 
 	@Override
 	public void onRecv(byte[] data, int size) {
+		System.out.println("接收数据"+data.length+"----size"+size);
 		// 加入缓冲区
 		mBuffer.addBytes(data, 0, size);
+		System.out.println("mBuffer"+mBuffer.size());
 		// 解析数据
 		Header head = new Header();
 		int len;
@@ -51,11 +53,13 @@ public class LoginChannel  implements ClientSocketHandler{
 		while(true)
 		{
 			len = Message.DecodeHeader(mBuffer, head);
+			System.out.println("len"+len);
 			if(len <= 0) {
 				break;
 			}
-			
+			System.out.println("登录响应"+head.getCmd1());
 			switch (head.getCmd1()) {
+
 			case Header.MessageType_mxpLogonResponse:
 			{
 				LogonResponse obj = new LogonResponse();

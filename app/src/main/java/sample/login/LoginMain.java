@@ -12,7 +12,6 @@ import com.zhuyunjian.library.StartUtil;
 
 import org.simple.eventbus.EventBus;
 
-import io.vov.vitamio.utils.Log;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓
@@ -63,7 +62,7 @@ public class LoginMain implements LoginHandler{
 
         // 121.43.155.221:15518
         // 121.43.63.101:18517
-        login.channel.Connect("121.43.63.101", 18517);
+        login.channel.Connect("121.41.112.232", 18517);
 
         try {
             Thread.sleep(1000 * 50);
@@ -97,11 +96,9 @@ public class LoginMain implements LoginHandler{
         System.out.println("Calias: " + res.getCalias());
         System.out.println("Cidiograph: " + res.getCidiograph());
         System.out.println("Cidiograph: " + res.getCidiograph());
-        System.out.println("Cvalue: " + res.getCvalue());
         System.out.println("Decocolor: " + res.getDecocolor());
         System.out.println("Nb: " + res.getNb());
         System.out.println("Ndeposit: " + res.getNdeposit());
-        System.out.println("Nfamilyid: " + res.getNfamilyid());
         System.out.println("Nk: " + res.getNk());
         System.out.println("Nlevel: " + res.getNlevel());
         System.out.println("Nverison: " + res.getNverison());

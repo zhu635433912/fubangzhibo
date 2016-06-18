@@ -48,11 +48,9 @@ public class TestLogin implements LoginHandler {
 		System.out.println("Calias: " + res.getCalias());
 		System.out.println("Cidiograph: " + res.getCidiograph());
 		System.out.println("Cidiograph: " + res.getCidiograph());
-		System.out.println("Cvalue: " + res.getCvalue());
 		System.out.println("Decocolor: " + res.getDecocolor());
 		System.out.println("Nb: " + res.getNb());
 		System.out.println("Ndeposit: " + res.getNdeposit());
-		System.out.println("Nfamilyid: " + res.getNfamilyid());
 		System.out.println("Nk: " + res.getNk());
 		System.out.println("Nlevel: " + res.getNlevel());
 		System.out.println("Nverison: " + res.getNverison());

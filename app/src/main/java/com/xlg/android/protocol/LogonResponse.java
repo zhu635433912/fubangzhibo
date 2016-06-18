@@ -2,13 +2,13 @@ package com.xlg.android.protocol;
 
 import com.xlg.android.utils.Tools;
 
-public class LogonResponse {	
+public class LogonResponse {
 	@StructOrder(0)
-	private int	userid;						//用户ID
+	private int    nverison;                   //版本号(使用xxx.xxx.xxx.xxx转成的ip值)
 	@StructOrder(1)
-	private int	nlevel;						//用户级别
+	private int	userid;						//用户ID
 	@StructOrder(2)
-	private int	nfamilyid;					//家族id
+	private int	nlevel;						//用户级别
 	@StructOrder(3)
 	private long       ndeposit;                   //银行存款
 	@StructOrder(4)
@@ -18,24 +18,21 @@ public class LogonResponse {
 	@StructOrder(6)
 	private int		decocolor;					//马甲颜色
 	@StructOrder(7)
-	private int    nverison;                   //版本号(使用xxx.xxx.xxx.xxx转成的ip值)
-	@StructOrder(8)
 	private short	online_stat;				//状态（0离线 1在线2隐身）
-	@StructOrder(9)
+	@StructOrder(8)
 	private short  headpic;					//头像ID
-	@StructOrder(10)
+	@StructOrder(9)
 	private short	reserve;					//保留
-	@StructOrder(11)
+	@StructOrder(10)
 	private byte			nettype;					//电信or联通 0->电信 1->联通
-	@StructOrder(12)
+	@StructOrder(11)
 	private byte			gender;						//性别（0－女，1－男，2－未知）
-	@StructOrder(13)
+	@StructOrder(12)
 	private byte[]			calias = new byte[32];			//昵称
-	@StructOrder(14)
+	@StructOrder(13)
 	private byte[]			cidiograph = new byte[128];	//个性签名
-	@StructOrder(15)
-	private byte[]			cvalue = new byte[256];				//大厅配置	
-	
+	@StructOrder(14)
+	private byte[] 			cphoto = new byte[32];//自定义头像名
 	public int getUserid() {
 		return userid;
 	}
@@ -47,12 +44,6 @@ public class LogonResponse {
 	}
 	public void setNlevel(int nlevel) {
 		this.nlevel = nlevel;
-	}
-	public int getNfamilyid() {
-		return nfamilyid;
-	}
-	public void setNfamilyid(int nfamilyid) {
-		this.nfamilyid = nfamilyid;
 	}
 	public long getNdeposit() {
 		return ndeposit;
@@ -114,7 +105,7 @@ public class LogonResponse {
 	public void setGender(byte gender) {
 		this.gender = gender;
 	}
-	
+
 	public String getCalias() {
 		return Tools.ByteArray2StringGBK(calias);
 	}
@@ -127,12 +118,13 @@ public class LogonResponse {
 	public void setCidiograph(String cidiograph) {
 		Tools.String2ByteArrayGBK(this.cidiograph, cidiograph);
 	}
-	public String getCvalue() {
-		return Tools.ByteArray2StringGBK(cvalue);
+
+	public String getCphoto() {
+		return Tools.ByteArray2StringGBK(cphoto);
 	}
-	public void setCvalue(String cvalue) {
-		Tools.String2ByteArrayGBK(this.cvalue, cvalue);
+
+	public void setCphoto(String cphoto) {
+		Tools.String2ByteArrayGBK(this.cphoto, cphoto);
 	}
-	
 	
 }

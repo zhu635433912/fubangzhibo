@@ -21,18 +21,16 @@ public class RoomChatMsg {
 	@StructOrder(7)
 	private short  srcsealid;          //发送者的盖章id(用于非本房间src-user)
 	@StructOrder(8)
-	private short  familyid;           //发送者的家族id(用于非本房间src-user)
-	@StructOrder(9)
 	private byte			msgtype;			//消息类型
-	@StructOrder(10)
+	@StructOrder(9)
 	private byte			isprivate;			//是否私聊
-	@StructOrder(11)
+	@StructOrder(10)
 	private short	textlen;			//聊天内容长度
-	@StructOrder(12)
+	@StructOrder(11)
 	private byte []			srcalias = new byte[32];	//发送者昵称
-	@StructOrder(13)
+	@StructOrder(12)
 	private byte []			toalias = new byte[32];	//接收者昵称
-	@StructOrder(14)
+	@StructOrder(13)
 	private ByteBuffer			content = new ByteBuffer();			//聊天内容
 	
 	public int getVcbid() {
@@ -82,12 +80,6 @@ public class RoomChatMsg {
 	}
 	public void setSrcsealid(short srcsealid) {
 		this.srcsealid = srcsealid;
-	}
-	public short getFamilyid() {
-		return familyid;
-	}
-	public void setFamilyid(short familyid) {
-		this.familyid = familyid;
 	}
 	public byte getMsgtype() {
 		return msgtype;

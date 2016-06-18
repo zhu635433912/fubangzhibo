@@ -331,13 +331,13 @@ public class RoomChannel  implements ClientSocketHandler{
 					mHandler.onSyncDecoColorNotify(obj);
 				}
 				break;
-			case Header.MessageType_mxpSetRoomBKgroupNotify:
-				{
-					RoomBKGround obj = new RoomBKGround();
-					Message.DecodeObject(mBuffer, obj);
-					mHandler.onSetRoomBKgroupNotify(obj);
-				}
-				break;
+//			case Header.MessageType_mxpSetRoomBKgroupNotify:
+//				{
+//					RoomBKGround obj = new RoomBKGround();
+//					Message.DecodeObject(mBuffer, obj);
+//					mHandler.onSetRoomBKgroupNotify(obj);
+//				}
+//				break;
 			case Header.MessageType_mxpSetRoomBaseInfoResponse:
 				{
 					mHandler.onSetRoomBaseInfoResponse();
@@ -571,33 +571,33 @@ public class RoomChannel  implements ClientSocketHandler{
 					mHandler.onDigTreasureResponse(obj);
 				}
 				break;
-			case Header.MessageType_mxpRedPagerResponse:
-				{
-					RedPagerRequest obj = new RedPagerRequest();
-					Message.DecodeObject(mBuffer, obj);
-					mHandler.onRedPagerResponse(obj);
-				}
-				break;
-			case Header.MessageType_mxpRedPagerError:
-				{
-					ByteBuffer obj = Message.DecodeBody(mBuffer);
-					mHandler.onRedPagerError(obj.getInt(0));
-				}
-				break;
-			case Header.MessageType_mxpGrabRedPagerResponse:
-				{
-					GrabRedPagerRequest obj = new GrabRedPagerRequest();
-					Message.DecodeObject(mBuffer, obj);
-					mHandler.onGrabRedPagerResponse(obj);
-				}
-				break;
-			case Header.MessageType_mxpPreTradeGiftResponse:
-				{
-					PreTradeGift obj = new PreTradeGift();
-					Message.DecodeObject(mBuffer, obj);
-					mHandler.onPreTradeGiftResponse(obj);
-				}
-				break;
+//			case Header.MessageType_mxpRedPagerResponse:
+//				{
+//					RedPagerRequest obj = new RedPagerRequest();
+//					Message.DecodeObject(mBuffer, obj);
+//					mHandler.onRedPagerResponse(obj);
+//				}
+//				break;
+//			case Header.MessageType_mxpRedPagerError:
+//				{
+//					ByteBuffer obj = Message.DecodeBody(mBuffer);
+//					mHandler.onRedPagerError(obj.getInt(0));
+//				}
+//				break;
+//			case Header.MessageType_mxpGrabRedPagerResponse:
+//				{
+//					GrabRedPagerRequest obj = new GrabRedPagerRequest();
+//					Message.DecodeObject(mBuffer, obj);
+//					mHandler.onGrabRedPagerResponse(obj);
+//				}
+//				break;
+//			case Header.MessageType_mxpPreTradeGiftResponse:
+//				{
+//					PreTradeGift obj = new PreTradeGift();
+//					Message.DecodeObject(mBuffer, obj);
+//					mHandler.onPreTradeGiftResponse(obj);
+//				}
+//				break;
 			default:
 				break;
 			}
@@ -684,7 +684,6 @@ public class RoomChannel  implements ClientSocketHandler{
 		obj.setDstplatformid((short) 0);
 		obj.setSrclevel(1312);
 		obj.setSrcsealid((short) mUserID);
-		obj.setFamilyid((short) 0);
 		obj.setMsgtype(msgType);//0普通聊天  1 房间广播
 		obj.setIsprivate(isprivate);
 		obj.setSrcalias(mUserID+"");
@@ -694,25 +693,28 @@ public class RoomChannel  implements ClientSocketHandler{
 
 	}
 	//发送礼物
-	public void sendGiftRecord(int toid,int giftId,int count){
+	public void sendGiftRecord(int toid,int giftId,int count, int topline, String toName){
 		Header header = new Header();
 		BigGiftRecord obj = new BigGiftRecord();
 		header.setCmd1(Header.MessageType_mxpTradeGiftRequest);
 		obj.setVcbid(mRoomID);
 		obj.setSrcid(mUserID);
+		obj.setTopline(topline);
 		obj.setToid(toid);
 		obj.setGiftid(giftId);
 		obj.setCount(count);
 		obj.setAction((byte)2);
-		obj.setServertype((byte)1);
+		obj.setServertype((byte)0);
 		obj.setBanonymous((byte)0);
 		obj.setCasttype((byte)1);
 		obj.setTime(System.currentTimeMillis());
-		obj.setOldcount(1);
-		obj.setFlyid((short) 0);
+		obj.setOldcount(0);
+		obj.setFlyid((short) -1);
 		obj.setSrcalias(mUserID+"");
-		obj.setToalias(toid+"");
+//		obj.setToalias(toid+"");
+		obj.setToalias(toName);
 		obj.setSztext("");
+		Log.d("123",obj.toString());
 		sendPack(header,obj);
 	}
 	//退出房间请求

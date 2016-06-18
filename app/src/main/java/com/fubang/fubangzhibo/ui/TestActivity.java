@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -26,6 +28,8 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.fubang.fubangzhibo.App;
+import com.fubang.fubangzhibo.App_;
 import com.fubang.fubangzhibo.R;
 import com.fubang.fubangzhibo.adapters.FaceAdapter;
 import com.fubang.fubangzhibo.adapters.GiftAdapter;
@@ -33,9 +37,11 @@ import com.fubang.fubangzhibo.adapters.RoomChatAdapter;
 import com.fubang.fubangzhibo.adapters.UserAdapter;
 import com.fubang.fubangzhibo.entities.FaceEntity;
 import com.fubang.fubangzhibo.entities.GiftEntity;
+import com.fubang.fubangzhibo.utils.FaceUtil;
 import com.fubang.fubangzhibo.utils.GiftUtil;
 import com.fubang.fubangzhibo.view.MyEditText;
 import com.xlg.android.protocol.BigGiftRecord;
+import com.xlg.android.protocol.JoinRoomResponse;
 import com.xlg.android.protocol.RoomChatMsg;
 import com.xlg.android.protocol.RoomKickoutUserInfo;
 import com.xlg.android.protocol.RoomUserInfo;
@@ -77,12 +83,13 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
     private Button giftSendBtn;
     private GridView gridView;
     private ListView userList;
+    private boolean isRunning = true;
 
     private List<RoomChatMsg> data = new ArrayList<>();
 
     private RoomChatAdapter adapter;
 
-    private AVModuleMgr mgr = null;
+    private AVModuleMgr mgr;
     @ViewById(R.id.text_surface)
     SurfaceView surfaceView;
     private Bitmap bmp;
@@ -100,13 +107,35 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
     private int roomId;
     private String ip;
     private int port;
+    private int ssrc;
+    private int topline;
+    private String toName;
     private List<RoomUserInfo> userInfos = new ArrayList<>();
     private RoomUserInfo sendToUser;
     private UserAdapter userAdapter;
+    private Thread runThread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            while (isRunning) {
+                play.start();
+                Log.d("123","chongxingqidong");
+                roomMain.Start(roomId, Integer.parseInt(StartUtil.getUserId(TestActivity.this)), StartUtil.getUserPwd(TestActivity.this), ip, port);
+            }
+        }
+    });;
+    PowerManager powerManager = null;
+    PowerManager.WakeLock wakeLock = null;
+
+    private String roomIp;
+    private App app;
 
     @Override
     public void before() {
-        String roomIp = getIntent().getStringExtra("roomIp");
+        app = (App) getApplication();
+//        if (app.getMgr() != null)
+//            mgr = app.getMgr();
+        Log.d("123","avModuleMgr-----"+mgr);
+        roomIp = getIntent().getStringExtra("roomIp");
         String[] Ips = roomIp.split(";");
         String[] ports = Ips[0].split(":");
         ip = ports[0];
@@ -116,18 +145,25 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
         EventBus.getDefault().register(this);
     }
 
+
     @Override
     public void initView() {
+//        runThread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (isRunning) {
+//                    play.start();
+//                    roomMain.Start(roomId, Integer.parseInt(StartUtil.getUserId(TestActivity.this)), StartUtil.getUserPwd(TestActivity.this), ip, port);
+//                }
+//            }
+//        });
+        Log.d("123","oncreate---");
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         RoomUserInfo roomUser = new RoomUserInfo();
         roomUser.setUseralias("大厅");
         userInfos.add(roomUser);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                roomMain.Start(roomId, Integer.parseInt(StartUtil.getUserId(TestActivity.this)),StartUtil.getUserPwd(TestActivity.this),ip,port);
-            }
-        }).start();
+        runThread.start();
         adapter = new RoomChatAdapter(data,this);
         listView.setAdapter(adapter);
         showWindow();
@@ -155,7 +191,7 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
             }
         });
         userWindow.setWidth(200);
-        ColorDrawable dw = new ColorDrawable(0xb0fb0aaf);
+        ColorDrawable dw = new ColorDrawable(0xb0ffffff);
         userWindow.setBackgroundDrawable(dw);
         userWindow.setHeight(500);
         userWindow.setOutsideTouchable(true);
@@ -168,22 +204,19 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
 
         faceWindow = new PopupWindow(view);
         faceWindow.setFocusable(true);
-        faces.add(new FaceEntity(R.drawable.mr701));
-        faces.add(new FaceEntity(R.drawable.mr702));
-        faces.add(new FaceEntity(R.drawable.mr703));
-        faces.add(new FaceEntity(R.drawable.mr704));
+        faces.addAll(FaceUtil.getFaces());
         FaceAdapter faceAdapter = new FaceAdapter(faces,this);
         gridView.setAdapter(faceAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("123",gifts.get(position)+"------------>");
-                if (position < 10) {
+                Log.d("123",faces.get(position)+"------------>");
+                if (position < 9) {
                     int faceNumber = position + 1;
                     editText.setText(editText.getText() + "/mr70" + faceNumber);
                 }
-                if (position >= 10) {
+                if (position >= 9) {
                     int faceNumber = position + 1;
                     editText.setText(editText.getText() + "/mr7" + faceNumber);
                 }
@@ -224,14 +257,14 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
             @Override
             public void onClick(View v) {
                 int count = Integer.parseInt(giftCount.getText().toString());
-                roomMain.getRoom().getChannel().sendGiftRecord(toid,giftId,count);
+                roomMain.getRoom().getChannel().sendGiftRecord(toid,giftId,count,topline,toName);
                 popupWindow.dismiss();
             }
         });
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        ColorDrawable dw = new ColorDrawable(0xb0fb0aaf);
+        ColorDrawable dw = new ColorDrawable(0xb0ffffff);
         popupWindow.setBackgroundDrawable(dw);
-        popupWindow.setHeight(300);
+        popupWindow.setHeight(400);
         popupWindow.setOutsideTouchable(true);
     }
 
@@ -275,7 +308,7 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(editText.getText())){
-                    if (sendToUser.getUseralias().contains("大厅"))
+                    if (userSendBtn.getText().toString().contains("大厅"))
                     {
                         roomMain.getRoom().getChannel().sendChatMsg(0, (byte) 0, (byte) 0, "<FONT style=\"FONT-FAMILY:宋体;FONT-SIZE:14px; COLOR:#000000\">" + editText.getText() + "</FONT>");
                         editText.setText("");
@@ -304,8 +337,10 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
             if (getGiftId == gifts.get(i).getGiftId()){
                 if (getGiftId<10)
                     giftTxt = "/g100"+getGiftId +"   x "+ count;
-                if (getGiftId>=10)
+                if (getGiftId>=10 && getGiftId < 100)
                     giftTxt = "/g10"+getGiftId +"   x "+ count;
+                if (getGiftId >= 100 )
+                    giftTxt = "/g1" + getGiftId +"    x"+ count;
                 RoomChatMsg msg = new RoomChatMsg();
                 msg.setContent("<FONT style=\"FONT-FAMILY:宋体;FONT-SIZE:14px; COLOR:#000000\">"+giftTxt+"</FONT>");
                 msg.setSrcid(obj.getSrcid());
@@ -315,6 +350,10 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
             }
         }
 
+    }
+    @Subscriber(tag = "JoinRoomResponse")
+    public void getJoinRoomResponse(JoinRoomResponse obj){
+        topline = obj.getTopline() - 1000;
     }
     //接收服务器发送的消息更新列表
     @Subscriber(tag="RoomChatMsg")
@@ -345,29 +384,77 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
 //        userList.setAdapter(new UserAdapter(userInfos,this));
         Log.d("123",userInfo.getUserid()+"-----------<<");
     }
+    @Subscriber(tag = "onMicUser")
+    public void getonMicUser(RoomUserInfo obj){
+        toName = obj.getUseralias();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isRunning = true;
+//        Log.d("123","onResume---");
+//        runThread.start();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        isRunning = true;
+        Log.d("123","onRestart---");
+//        runThread.interrupt();
+//        runThread.start();
+//        startActivity(TestActivity_.intent(this)
+//                .extra("roomIp",roomIp).extra("roomId",roomId+"").get());
+    }
+
+
+    protected void onPause() {
+        super.onPause();
+        isRunning = false;
+        Log.d("123","onPause---");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (mgr != null) {
+                    play.stop();
+                    mgr.StopRTPSession();
+                    mgr.Uninit();
+                }
+            }
+        }).start();
+//        roomMain.getRoom().getChannel().sendLeaveRoom(Integer.parseInt(StartUtil.getUserId(this)));
+//        roomMain.getRoom().onDisconnected();
+    }
+
     @Override
     public void onStop() {
+        Log.d("123","onStop---");
+        isRunning = false;
         super.onStop();
-        if (mgr == null){
-
-        }else {
+        if (mgr != null){
+            play.stop();
             mgr.StopRTPSession();
             mgr.Uninit();
-            play.stop();
         }
+        roomMain.getRoom().getChannel().sendLeaveRoom(Integer.parseInt(StartUtil.getUserId(this)));
+        roomMain.getRoom().onDisconnected();
+//        runThread.interrupt();
+//        finish();
     }
 
     public void StartAV(String ip, int port, int rand, int uid) {
-        mgr.Init();
-        Log.d("123","===uid"+uid);
-        mgr.CreateRTPSession(0);
-        mgr.SetServerAddr2(ip, port, 0);
-        mgr.StartRTPSession();
+//        if (app.getMgr() == null) {
+            mgr.Init();
+            Log.d("123", "===uid" + uid);
+            mgr.CreateRTPSession(0);
+            mgr.SetServerAddr2(ip, port, 0);
+            mgr.StartRTPSession();
+//        }
 
         if (rand < 1800000000)
             rand = 1800000000;
 
-        int ssrc = rand - uid;
+        ssrc = rand - uid;
 
         mgr.AddRTPRecver(0, ssrc, 99, 1000);
         mgr.SetRTPRecverARQMode(ssrc, 99, 1);
@@ -419,8 +506,10 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
     @Override
     public void onAudio(int ssrc, int sample, int channel, byte[] pcm) {
         System.out.println("========== onAudio: " + sample + ":" + channel + "(" + pcm.length + ")");
-        play.setConfig(sample, channel);
-        play.play(pcm);
+        if (play != null) {
+            play.setConfig(sample, channel);
+            play.play(pcm);
+        }
     }
 
     @Override
@@ -428,17 +517,26 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
         toid = uid;
         // TODO Auto-generated method stub
         if(null == mgr) {
-            mgr = new AVModuleMgr();
-
+                mgr = new AVModuleMgr();
+//            }
+            Log.d("123","mgr-----new--"+mgr);
             StartAV(ip, port, rand, uid);
         }
     }
 
     @Override
     protected void onDestroy() {
+        Log.d("123","onDestory---");
+        isRunning = false;
         super.onDestroy();
-        roomMain.getRoom().getChannel().sendLeaveRoom(Integer.parseInt(StartUtil.getUserId(this)));
-        roomMain.getRoom().onDisconnected();
+        if (mgr == null){
+
+        }else {
+            mgr.StopRTPSession();
+            mgr.Uninit();
+            play.stop();
+        }
+
         EventBus.getDefault().unregister(this);
     }
 

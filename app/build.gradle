@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.0 rc1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.fubang.fubangzhibo"
@@ -28,7 +28,6 @@ dependencies {
     compile project(':library')
     compile project(':oneKeyShare')
     compile project(':shareSDKmainLibs')
-    compile project(':vitamio')
     compile 'com.android.support:appcompat-v7:23.2.0'
     compile 'org.androidannotations:androidannotations-api:3.3.2'
     compile 'com.facebook.fresco:fresco:0.9.0'

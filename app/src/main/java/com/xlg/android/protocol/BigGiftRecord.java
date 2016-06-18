@@ -2,11 +2,13 @@ package com.xlg.android.protocol;
 
 import com.xlg.android.utils.Tools;
 
+import java.util.Arrays;
+
 public class BigGiftRecord {
 	@StructOrder(0)
 	private int	vcbid;
 	@StructOrder(1)
-	private  int	dstvcbid;			//目标房间ID
+	private  int	topline;			//目标房间ID
 	@StructOrder(2)
 	private  short  srcplatformid;		//原平台ID
 	@StructOrder(3)
@@ -41,20 +43,23 @@ public class BigGiftRecord {
 	private byte[]			toalias = new byte[32];	//接收者昵称
 	@StructOrder(18)
 	private byte[]			sztext = new byte[40];//定义40,实际使用最多18个汉字或英文（最多占36个长度)
-	
-	
+
+
 	public int getVcbid() {
 		return vcbid;
 	}
 	public void setVcbid(int vcbid) {
 		this.vcbid = vcbid;
 	}
-	public int getDstvcbid() {
-		return dstvcbid;
+
+	public int getTopline() {
+		return topline;
 	}
-	public void setDstvcbid(int dstvcbid) {
-		this.dstvcbid = dstvcbid;
+
+	public void setTopline(int topline) {
+		this.topline = topline;
 	}
+
 	public short getSrcplatformid() {
 		return srcplatformid;
 	}
@@ -158,6 +163,29 @@ public class BigGiftRecord {
 		Tools.String2ByteArrayGBK(this.sztext, sztext);
 	}
 
-	
-	
+
+	@Override
+	public String toString() {
+		return "BigGiftRecord{" +
+				"vcbid=" + vcbid +
+				", topline=" + topline +
+				", srcplatformid=" + srcplatformid +
+				", dstplatformid=" + dstplatformid +
+				", srcid=" + srcid +
+				", toid=" + toid +
+				", giftid=" + giftid +
+				", count=" + count +
+				", action=" + action +
+				", servertype=" + servertype +
+				", banonymous=" + banonymous +
+				", casttype=" + casttype +
+				", time=" + time +
+				", oldcount=" + oldcount +
+				", flyid=" + flyid +
+				", reserve=" + reserve +
+				", srcalias=" + Arrays.toString(srcalias) +
+				", toalias=" + Arrays.toString(toalias) +
+				", sztext=" + Arrays.toString(sztext) +
+				'}';
+	}
 }

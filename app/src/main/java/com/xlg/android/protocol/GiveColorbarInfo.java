@@ -8,7 +8,7 @@ public class GiveColorbarInfo {
 	@StructOrder(2)
 	private int   toid;        //
 	@StructOrder(3)
-	private short colorbarnum; //彩条总数
+	private int colorbarnum; //彩条总数
 	public int getVcbid() {
 		return vcbid;
 	}
@@ -27,10 +27,10 @@ public class GiveColorbarInfo {
 	public void setToid(int toid) {
 		this.toid = toid;
 	}
-	public short getColorbarnum() {
+	public int getColorbarnum() {
 		return colorbarnum;
 	}
-	public void setColorbarnum(short colorbarnum) {
+	public void setColorbarnum(int colorbarnum) {
 		this.colorbarnum = colorbarnum;
 	}
 	

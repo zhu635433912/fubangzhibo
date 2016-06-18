@@ -6,25 +6,22 @@ public class UserPayResponse {
 	@StructOrder(1)
 	private int	userid;				//用户ID
 	@StructOrder(2)
-	private int	toid;				//对手ID
-	@StructOrder(3)
 	private long   	balance;			//余额
-	@StructOrder(4)
+	@StructOrder(3)
 	private long   	giftbalance;		//礼物金额
-	@StructOrder(5)
+	@StructOrder(4)
 	private long		expend2;			//当月消费额
-	@StructOrder(6)
-	private int	type;				//奖励提示
-	@StructOrder(7)
-	private long		money;				//变化金额
-	@StructOrder(8)
+	@StructOrder(5)
 	private int	reserve1;			//保留1
-	@StructOrder(9)
+	@StructOrder(6)
 	private int	reserve2;			//保留2
-	@StructOrder(10)
+	@StructOrder(7)
 	private long	        time;				//发生时间
-	
-	
+	@StructOrder(8)
+	private long charisma;					//魅力值
+	@StructOrder(9)
+	private long intimacy;					//亲密度
+
 	public int getVcbid() {
 		return vcbid;
 	}
@@ -36,12 +33,6 @@ public class UserPayResponse {
 	}
 	public void setUserid(int userid) {
 		this.userid = userid;
-	}
-	public int getToid() {
-		return toid;
-	}
-	public void setToid(int toid) {
-		this.toid = toid;
 	}
 	public long getBalance() {
 		return balance;
@@ -61,18 +52,23 @@ public class UserPayResponse {
 	public void setExpend2(long expend2) {
 		this.expend2 = expend2;
 	}
-	public int getType() {
-		return type;
+
+	public long getCharisma() {
+		return charisma;
 	}
-	public void setType(int type) {
-		this.type = type;
+
+	public void setCharisma(long charisma) {
+		this.charisma = charisma;
 	}
-	public long getMoney() {
-		return money;
+
+	public long getIntimacy() {
+		return intimacy;
 	}
-	public void setMoney(long money) {
-		this.money = money;
+
+	public void setIntimacy(long intimacy) {
+		this.intimacy = intimacy;
 	}
+
 	public int getReserve1() {
 		return reserve1;
 	}
@@ -91,6 +87,7 @@ public class UserPayResponse {
 	public void setTime(long time) {
 		this.time = time;
 	}
-	
-	
+
+
+
 }

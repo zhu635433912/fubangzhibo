@@ -53,39 +53,42 @@ public class Header {
 	public static final byte MessageType_mxpSetUserPriorityResponse = (byte)(6 + 70); // 76
 	public static final byte MessageType_mxpSetUserPriorityNotify = (byte)(6 + 72); // 78
 	public static final byte MessageType_mxpLocateUserIPResponse = (byte)(6 + 74); // 80
-	public static final byte MessageType_mxpGetSiegeInfoResponse = (byte)(6 + 81); // 87
-	public static final byte MessageType_mxpSiegeInfoNotify = (byte)(6 + 82); // 88
-	public static final byte MessageType_mxpSendSealNotify = (byte)(6 + 84); // 90
-	public static final byte MessageType_mxpForbidUserChatNotify = (byte)(6 + 86); // 92
-	public static final byte MessageType_mxpSetRoomBKgroupNotify = (byte)(6 + 90); // 96
-	public static final byte MessageType_mxpGetRoomMicListResponse = (byte)(6 + 101); // 107
-	public static final byte MessageType_mxpSetUserPwdRepsonse = (byte)(6 + 105); // 111
-	public static final byte MessageType_mxpSetUserPwdError = (byte)(6 + 106); //112
-	public static final byte MessageType_mxpLotteryGiftNotify = (byte)(6 + 107); // 113
-	public static final byte MessageType_mxpLotteryNotify = (byte)(6 + 108); // 114
-	public static final byte MessageType_mxpChestBonusAmountNotify = (byte)(6 + 109); // 115
-	public static final byte MessageType_mxpUserChestChangeNotify = (byte)(6 + 110); // 116
-	public static final byte MessageType_mxpGetOpenChestInfoResponse = (byte)(6 + 112); // 118
-	public static final byte MessageType_mxpOpenChestNotify = (byte)(6 + 114); // 120
-	public static final byte MessageType_mxpGiveColorbarNotify = (byte)(6 + 116); // 122
-	public static final byte MessageType_mxpAddClosedFriendNotify = (byte)(6 + 117); // 123
-	public static final byte MessageType_mxpBankDepositResponse = (byte)(6 + 119); // 125
-	public static final byte MessageType_mxpBankDepositError = (byte)(6 + 120); // 126
-	public static final byte MessageType_mxpAddMicTimeNotify = (byte)(6 + 122); // 128
-	public static final byte MessageType_mxpActWaitMicUserNotify = (byte)(6 + 124); // 130
-	public static final byte MessageType_mxpRedPagerResponse = (byte)(6 + 126); // 132
-	public static final byte MessageType_mxpRedPagerError = (byte)(6 + 127); // 133
-	public static final byte MessageType_mxpGrabRedPagerResponse = (byte)(6 + 129); // 135
-	public static final byte MessageType_mxpPreTradeGiftResponse = (byte)(6 + 131); // 137
+
+	public static final byte MessageType_mxpGetSiegeInfoResponse = (byte)(6 + 79); // 85
+	public static final byte MessageType_mxpSiegeInfoNotify = (byte)(6 + 80); // 86
+	public static final byte MessageType_mxpSendSealNotify = (byte)(6 + 82); // 88
+	public static final byte MessageType_mxpForbidUserChatNotify = (byte)(6 + 84); // 90
+	public static final byte MessageType_mxpAddVcbToFavoriteRequest = (byte)(6 + 85);//91
+	public static final byte MessageType_mxpAddVcbToFavoriteResponse = (byte)(6 + 86);//92
+	public static final byte MessageType_mxpGetRoomMicListResponse	 = (byte)(6 + 90); // 96
+	public static final byte MessageType_mxpSetUserPwdRepsonse = (byte)(6 + 94); // 100
+	public static final byte MessageType_mxpSetUserPwdError = (byte)(6 + 95); //101
+	public static final byte MessageType_mxpLotteryGiftNotify = (byte)(6 + 96); // 102
+	public static final byte MessageType_mxpLotteryNotify = (byte)(6 + 97); // 103
+	public static final byte MessageType_mxpChestBonusAmountNotify = (byte)(6 + 98); // 104
+	public static final byte MessageType_mxpUserChestChangeNotify = (byte)(6 + 99); // 105
+	public static final byte MessageType_mxpGetOpenChestInfoResponse = (byte)(6 + 101); // 107
+	public static final byte MessageType_mxpOpenChestNotify = (byte)(6 + 103); // 109
+	public static final byte MessageType_mxpGiveColorbarNotify = (byte)(6 + 105); // 111
+	public static final byte MessageType_mxpAddClosedFriendNotify = (byte)(6 + 106); // 112
+	public static final byte MessageType_mxpBankDepositResponse = (byte)(6 + 108); // 114
+	public static final byte MessageType_mxpBankDepositError = (byte)(6 + 109); // 115
+	public static final byte MessageType_mxpAddMicTimeNotify = (byte)(6 + 111); // 117
+	public static final byte MessageType_mxpActWaitMicUserNotify = (byte)(6 + 113); // 119
+
+//	public static final byte MessageType_mxpRedPagerResponse = (byte)(6 + 126); // 132
+//	public static final byte MessageType_mxpRedPagerError = (byte)(6 + 127); // 133
+//	public static final byte MessageType_mxpGrabRedPagerResponse = (byte)(6 + 129); // 135
+//	public static final byte MessageType_mxpPreTradeGiftResponse = (byte)(6 + 131); // 137
 	
 	public static final byte MessageType_mxpSysCastNotify = (byte)189; // 189
 	public static final byte MessageType_mxpClientHelloCommand = (byte) 0xbe; // 190;
-	public static final byte MessageType_mxpRoomUserKeepAliveRequest = (byte)(190 + 4); // 194
-	public static final byte MessageType_mxpRoomUserKeepAliveResponse = (byte)(190 + 5); // 195
+	public static final byte MessageType_mxpRoomUserKeepAliveRequest = (byte)(190 + 5); // 195
+	public static final byte MessageType_mxpRoomUserKeepAliveResponse = (byte)(190 + 6); // 196
 	
 	public static final byte MessageType_mxpSyncUserHeadPicNotify = (byte)(210 + 9); // 219
-	public static final byte MessageType_mxpAuthorityRejected = (byte)(210 + 12); // 222
-	public static final byte MessageType_mxpDigTreasureResponse = (byte)(210 + 16);  // 226
+	public static final byte MessageType_mxpAuthorityRejected = (byte)(210 + 10); // 220
+	public static final byte MessageType_mxpDigTreasureResponse = (byte)(210 + 14);  // 224
 
 	
 	private int		length;		//数据包总长

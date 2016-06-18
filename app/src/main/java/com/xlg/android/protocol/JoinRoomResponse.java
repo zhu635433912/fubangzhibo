@@ -9,66 +9,91 @@ public class JoinRoomResponse {
 	@StructOrder(1)
 	private int	vcbid;
 	@StructOrder(2)
-	private byte	        attributeid;                //房间属性（数字号码）
+	private int	        topline;                //房间排名
 	@StructOrder(3)
-	private byte   chestnum;                   //用户宝箱数目
+	private int   time;                   //剩余时间
 	@StructOrder(4)
-	private short	seats;						//座位数，目标1000~2000人。
+	private byte	        attributeid;                //房间属性（数字号码）
 	@StructOrder(5)
-	private int	groupid;					//房间组ID
+	private byte   chestnum;                   //用户宝箱数目
 	@StructOrder(6)
-	private int	runstate;					//房间管理状态。使用bit,一共可以放置32个,第1位:是否允许悄悄话? 第2位:是否允许仍塞子，上传和广播时均是混合结果数据
+	private short	seats;						//座位数，目标1000~2000人。
 	@StructOrder(7)
-	private int	createrid;					//房主id
+	private int	groupid;					//房间组ID
 	@StructOrder(8)
-	private int	op1id;						//1第二房主
+	private int	runstate;					//房间管理状态。使用bit,一共可以放置32个,第1位:是否允许悄悄话? 第2位:是否允许仍塞子，上传和广播时均是混合结果数据
 	@StructOrder(9)
-	private int	op2id;						//2第二房主
+	private int	createrid;					//房主id
 	@StructOrder(10)
-	private int	op3id;						//3第三房主
+	private int	op1id;						//1第二房主
 	@StructOrder(11)
-	private int	op4id;						//4第四房主
+	private int	op2id;						//2第二房主
 	@StructOrder(12)
-	private int	op5id;						//5第五房主
+	private int	op3id;						//3第三房主
 	@StructOrder(13)
-	private int	op6id;						//6第六房主
+	private int	op4id;						//4第四房主
 	@StructOrder(14)
-	private int	ntype;						//用来标识房间类型(1-横3; 2-竖3; 3-2视频)
+	private int	op5id;						//5第五房主
 	@StructOrder(15)
-	private short	bkgroundid;					//房间背景id.
+	private int	op6id;						//6第六房主
 	@StructOrder(16)
-	private int	reserve1;					//预留
-//	unsigned int	op1list[ASSOWNERLEN];		//副房主列表 (暂未使用)
+	private int	ntype;						//用来标识房间类型(1-横3; 2-竖3; 3-2视频)
 	@StructOrder(17)
-	private short	playernumer;				//管理员列表人数。
+	private short	bkgroundid;					//房间背景id.
 	@StructOrder(18)
-	private short	colorbarnum;			    //自己的彩条总数。
+	private int	reserve1;					//预留
+	//	unsigned int	op1list[ASSOWNERLEN];		//副房主列表 (暂未使用)
 	@StructOrder(19)
-	private long    	deposit;                    //银行存款
+	private short	playernumer;				//管理员列表人数。
 	@StructOrder(20)
-	private long		nk;							//剩余K币(请求者的)
+	private int	colorbarnum;			    //自己的彩条总数。
 	@StructOrder(21)
-	private long		nb;							//积分数(请求者的)
+	private long    	deposit;                    //银行存款
 	@StructOrder(22)
-	private int    nchestbonusamount;          //幸运奖池最新金额总数
+	private long		nk;							//剩余K币(请求者的)
 	@StructOrder(23)
-	private byte[]			vcbname = new byte[32];		//房间名称
+	private long		nb;							//积分数(请求者的)
 	@StructOrder(24)
-	private byte[]			vcbtheme = new byte[64];		//房间描述
+	private int    nchestbonusamount;          //幸运奖池最新金额总数
 	@StructOrder(25)
-	private byte[]			mediaserver = new byte[128];	//房间媒体服务器。
+	private byte[]			vcbname = new byte[32];		//房间名称
 	@StructOrder(26)
-	private long           nmictime;                   //房间麦时
+	private byte[]			vcbtheme = new byte[64];		//房间描述
 	@StructOrder(27)
-	private int           nmiclimit;                  //房间默认上麦几次
+	private byte[]			mediaserver = new byte[128];	//房间媒体服务器。
 	@StructOrder(28)
-	private int           nmiclimitall;
+	private long           nmictime;                   //房间麦时
 	@StructOrder(29)
-	private byte[]          carname = new byte[32];                    //用户座驾名字
+	private int           nmiclimit;                  //房间默认上麦几次
 	@StructOrder(30)
+	private int           nmiclimitall;
+	@StructOrder(31)
+	private byte[]          carname = new byte[32];                    //用户座驾名字
+
+	public void setColorbarnum(int colorbarnum) {
+		this.colorbarnum = colorbarnum;
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+
+	public int getTopline() {
+		return topline;
+	}
+
+	public void setTopline(int topline) {
+		this.topline = topline;
+	}
+
+	@StructOrder(32)
 	private ByteBuffer 		playerlist = new ByteBuffer();				//管理员列表。变长
-	
-	
+
+
 	public int getUserid() {
 		return userid;
 	}
@@ -177,12 +202,6 @@ public class JoinRoomResponse {
 	public void setPlayernumer(short playernumer) {
 		this.playernumer = playernumer;
 	}
-	public short getColorbarnum() {
-		return colorbarnum;
-	}
-	public void setColorbarnum(short colorbarnum) {
-		this.colorbarnum = colorbarnum;
-	}
 	public long getDeposit() {
 		return deposit;
 	}
@@ -253,11 +272,11 @@ public class JoinRoomResponse {
 	public int[] getPlayerlist() {
 		int len = playerlist.size() / 4;
 		int[] ret = new int[len];
-		
+
 		for(int i = 0; i < len; i++) {
 			ret[i] = playerlist.getInt(i * 4);
 		}
-		
+
 		return ret;
 	}
 	public void setPlayerlist(int[] playerlist) {
@@ -267,6 +286,6 @@ public class JoinRoomResponse {
 			this.playerlist.addInt(playerlist[i]);
 		}
 	}
-	
-	
+
+
 }

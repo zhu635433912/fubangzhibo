@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.fubang.fubangzhibo.App_;
 import com.fubang.fubangzhibo.R;
 import com.fubang.fubangzhibo.adapters.RoomChatAdapter;
 import com.fubang.fubangzhibo.view.MyEditText;
@@ -111,6 +112,7 @@ public class RoomActivity extends BaseActivity implements  MicNotify, RoomHandle
             getChannel().setUserID(Integer.parseInt(StartUtil.getUserId(RoomActivity.this)));
             getChannel().setUserPwd(StartUtil.getUserPwd(RoomActivity.this));
             getChannel().Connect("121.43.63.101",10927);
+            play.start();
             while(isConnected) {
                 try {
                     Thread.sleep(1000 * 5);
@@ -532,6 +534,19 @@ public class RoomActivity extends BaseActivity implements  MicNotify, RoomHandle
         play.stop();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                play.stop();
+                mgr.StopRTPSession();
+                mgr.Uninit();
+            }
+        }).start();
+    }
+
     public void StartAV(String ip, int port, int rand, int uid) {
         mgr.Init();
 
@@ -603,8 +618,8 @@ public class RoomActivity extends BaseActivity implements  MicNotify, RoomHandle
     public void onMic(String ip, int port, int rand, int uid) {
         // TODO Auto-generated method stub
         if(null == mgr) {
-            mgr = new AVModuleMgr();
-
+//            mgr = new AVModuleMgr();
+            mgr = App_.getInstance().getMgr();
             StartAV(ip, port, rand, uid);
         }
     }

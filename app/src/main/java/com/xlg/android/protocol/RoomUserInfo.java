@@ -6,18 +6,18 @@ public class RoomUserInfo {
 	@StructOrder(0)
 	private int	userid;
 	@StructOrder(1)
-	private int	vcbid;
+	private int	actorid;			//艺人身份
 	@StructOrder(2)
-	private int	level1;				//用户级别
+	private int	vcbid;
 	@StructOrder(3)
-	private int	nfamilyid;			//所属家族id
+	private int	level1;				//用户级别
 	@StructOrder(4)
 	private int	decocolor;			//马甲颜色
 	@StructOrder(5)
 	private short	reserve;			//预留//用于表示是否为正常用户0-正常，1-机器人1
 	@StructOrder(6)
 	private short	sealid;				//盖章id
-//	unsigned int	pigcount;			//猪头(暂未使用)
+	//	unsigned int	pigcount;			//猪头(暂未使用)
 	@StructOrder(7)
 	private long	sealbringtime;		//盖章时长（秒）1970后时长
 	@StructOrder(8)
@@ -37,7 +37,7 @@ public class RoomUserInfo {
 	@StructOrder(15)
 	private byte			gender;				//性别（0－女，1－男，2－未知）
 	@StructOrder(16)
-	private short			colorbarnum;		//自己的彩条总数
+	private int			colorbarnum;		//自己的彩条总数
 	@StructOrder(17)
 	private byte[]			useralias = new byte[32];//昵称
 	// add by:baddie@126.com  返回金币做蝴蝶显示用 返回麦时麦序供限时麦用
@@ -48,28 +48,53 @@ public class RoomUserInfo {
 	@StructOrder(20)
 	private long		nexpend2;			//当月消费额
 	@StructOrder(21)
-	private short           micindex;            //在1麦还是2麦
+	private long		ncharisma;			//魅力值
 	@StructOrder(22)
-	private long    micendtime;             //麦时结束时间
+	private long		nintimacy;			//亲密度
 	@StructOrder(23)
-	private long    micnowtime;           // 现在麦时过了多久
+	private short           micindex;            //在1麦还是2麦
 	@StructOrder(24)
-	private byte[]            carname = new byte[32];              //座驾的名字
+	private long    micendtime;             //麦时结束时间
 	@StructOrder(25)
-	private int				isallowupmic;			//是否允许抱麦
+	private long    micnowtime;           // 现在麦时过了多久
 	@StructOrder(26)
-	private int				headid;					//头像id
+	private byte[]            carname = new byte[32];              //座驾的名字
 	@StructOrder(27)
-	private int				kingmic;				//金麦克
+	private int				isallowupmic;			//是否允许抱麦
 	@StructOrder(28)
-	private byte[]			clastloginmac = new byte[32];//mac地址
+	private int				headid;					//头像id
 	@StructOrder(29)
-	private int				mateid;					//伴侣id
+	private int				topline;				//上头条
 	@StructOrder(30)
-	private int				matetype;				//伴侣身份
+	private byte[]			clastloginmac = new byte[32];//mac地址
 	@StructOrder(31)
-	private byte[]			matealias = new byte[32];	//伴侣昵称
-// 	int				nshiledgiftonsmallspeaker; //送的礼物是否上广播和跑道显示
+	private byte[]				cphoto = new byte[32];					//自定义头像名称
+	@StructOrder(32)
+	private byte[]				cteamname = new byte[10];				//团名
+	@StructOrder(33)
+	private int			actorid_w ;	//佩戴的徽章的艺人id
+	@StructOrder(34)
+	private long			convalue_w ;	//佩戴的徽章的贡献值
+	@StructOrder(35)
+	private byte[]				cteamname_w = new byte[10];				//佩戴徽章的团名
+	public long getConvalue_w() {
+		return convalue_w;
+	}
+
+	public void setConvalue_w(long convalue_w) {
+		this.convalue_w = convalue_w;
+	}
+
+	public String getCteamname_w() {
+		return Tools.ByteArray2StringGBK(cteamname_w);
+	}
+
+	public void setCteamname_w(String cteamname_w) {
+		Tools.String2ByteArrayGBK(this.cteamname_w , cteamname_w);
+	}
+
+
+	// 	int				nshiledgiftonsmallspeaker; //送的礼物是否上广播和跑道显示
 // 	int				nshiledgiftshow;		//是否屏蔽礼物的滚动显示效果
 // 	int				nshiledgifteffectsound;	//是否屏蔽礼物/烟花的flash效果和道具声音
 // 	int				nshileddalabasound;		//是否屏蔽大喇叭声音效果
@@ -90,12 +115,6 @@ public class RoomUserInfo {
 	}
 	public void setLevel1(int level1) {
 		this.level1 = level1;
-	}
-	public int getNfamilyid() {
-		return nfamilyid;
-	}
-	public void setNfamilyid(int nfamilyid) {
-		this.nfamilyid = nfamilyid;
 	}
 	public int getDecocolor() {
 		return decocolor;
@@ -169,10 +188,10 @@ public class RoomUserInfo {
 	public void setGender(byte gender) {
 		this.gender = gender;
 	}
-	public short getColorbarnum() {
+	public int getColorbarnum() {
 		return colorbarnum;
 	}
-	public void setColorbarnum(short colorbarnum) {
+	public void setColorbarnum(int colorbarnum) {
 		this.colorbarnum = colorbarnum;
 	}
 	public String getUseralias() {
@@ -235,36 +254,67 @@ public class RoomUserInfo {
 	public void setHeadid(int headid) {
 		this.headid = headid;
 	}
-	public int getKingmic() {
-		return kingmic;
-	}
-	public void setKingmic(int kingmic) {
-		this.kingmic = kingmic;
-	}
 	public String getClastloginmac() {
 		return Tools.ByteArray2StringGBK(clastloginmac);
 	}
 	public void setClastloginmac(String clastloginmac) {
 		Tools.String2ByteArrayGBK(this.clastloginmac, clastloginmac);
 	}
-	public int getMateid() {
-		return mateid;
+
+	public int getActorid() {
+		return actorid;
 	}
-	public void setMateid(int mateid) {
-		this.mateid = mateid;
+
+	public void setActorid(int actorid) {
+		this.actorid = actorid;
 	}
-	public int getMatetype() {
-		return matetype;
+
+	public long getNcharisma() {
+		return ncharisma;
 	}
-	public void setMatetype(int matetype) {
-		this.matetype = matetype;
+
+	public void setNcharisma(long ncharisma) {
+		this.ncharisma = ncharisma;
 	}
-	public String getMatealias() {
-		return Tools.ByteArray2StringGBK(matealias);
+
+	public long getNintimacy() {
+		return nintimacy;
 	}
-	public void setMatealias(String matealias) {
-		Tools.String2ByteArrayGBK(this.matealias, matealias);
+
+	public void setNintimacy(long nintimacy) {
+		this.nintimacy = nintimacy;
 	}
-	
-	
+
+	public int getTopline() {
+		return topline;
+	}
+
+	public void setTopline(int topline) {
+		this.topline = topline;
+	}
+
+	public String getCphoto() {
+		return Tools.ByteArray2StringGBK(cphoto);
+	}
+
+	public void setCphoto(String cphoto) {
+		Tools.String2ByteArrayGBK(this.cphoto,cphoto);
+	}
+
+	public String getCteamname() {
+		return Tools.ByteArray2StringGBK(cteamname);
+	}
+
+	public void setCteamname(String cteamname) {
+		Tools.String2ByteArrayGBK(this.cteamname ,cteamname);
+	}
+
+	public int getActorid_w() {
+		return actorid_w;
+	}
+
+	public void setActorid_w(int actorid_w) {
+		this.actorid_w = actorid_w;
+	}
+
 }
