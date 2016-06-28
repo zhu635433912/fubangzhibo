@@ -16,7 +16,7 @@ import cn.sharesdk.framework.ShareSDK;
  */
 @EApplication
 public class App extends Application{
-    private AVModuleMgr mgr ;
+//    private AVModuleMgr mgr ;
 //    private static volatile App instance = null;
 //
 //    // private constructor suppresses
@@ -37,22 +37,19 @@ public class App extends Application{
 //        return instance;
 //    }
 
-
+    /**
+     * 初始化
+     */
     @Override
     public void onCreate() {
         super.onCreate();
 //        setMgr(new AVModuleMgr());
-        Log.d("123",mgr+"------mgr");
+//        Log.d("123",mgr+"------mgr");
+        //初始化Fresco
         FrescoHelper.getInstance().init(this);
+        //初始化数据库类
         DbUtil.init(this);
+        //初始化ShareSDK
         ShareSDK.initSDK(this);
-    }
-
-    public void setMgr(AVModuleMgr mgr) {
-        this.mgr = mgr;
-    }
-
-    public AVModuleMgr getMgr(){
-        return mgr;
     }
 }

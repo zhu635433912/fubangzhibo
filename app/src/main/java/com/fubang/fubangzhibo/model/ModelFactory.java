@@ -1,8 +1,11 @@
 package com.fubang.fubangzhibo.model;
 
+import com.fubang.fubangzhibo.model.impl.AnchorModelImpl;
+import com.fubang.fubangzhibo.model.impl.GiftTopModelImpl;
 import com.fubang.fubangzhibo.model.impl.HomeHeadPicModelImpl;
 import com.fubang.fubangzhibo.model.impl.HomeIconModelImpl;
 import com.fubang.fubangzhibo.model.impl.HomeModelImpl;
+import com.fubang.fubangzhibo.model.impl.RichModelImpl;
 import com.fubang.fubangzhibo.model.impl.RoomListModelImpl;
 
 /**
@@ -40,4 +43,10 @@ public class ModelFactory {
     public RoomListModelImpl getRoomListModelImpl(){
         return RoomListModelImpl.getInstance();
     }
+
+    public RichModelImpl getRichModelImpl(){return RichModelImpl.getInstance();}
+
+    public GiftTopModelImpl getGiftTopModelImpl(){return GiftTopModelImpl.getInstance();}
+
+    public AnchorModelImpl getAnchorModelImpl(){return AnchorModelImpl.getInstance();}
 }

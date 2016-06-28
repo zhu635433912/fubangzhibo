@@ -21,6 +21,9 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 
+/**
+ * 主页面
+ */
 @EActivity(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
     @ViewById(R.id.main_bottom_radiogp)
@@ -33,9 +36,13 @@ public class MainActivity extends BaseActivity {
         fragments.add(LiveFragment_.builder().build());
         fragments.add(FollowFragment_.builder().build());
         fragments.add(MyFragment_.builder().build());
+        //底部按钮切换fragment的工具类
         new FragmentTabUtils(this,getSupportFragmentManager(),radioGroup,fragments,R.id.main_contaner);
     }
 
+    /**
+     * 本机ip
+     */
     @Override
     public void initData() {
         //获取wifi服务

@@ -39,35 +39,35 @@ public class JoinRoomResponse {
 	@StructOrder(16)
 	private int	ntype;						//用来标识房间类型(1-横3; 2-竖3; 3-2视频)
 	@StructOrder(17)
-	private short	bkgroundid;					//房间背景id.
-	@StructOrder(18)
+//	private short	bkgroundid;					//房间背景id.
+//	@StructOrder(18)
 	private int	reserve1;					//预留
 	//	unsigned int	op1list[ASSOWNERLEN];		//副房主列表 (暂未使用)
-	@StructOrder(19)
+	@StructOrder(18)
 	private short	playernumer;				//管理员列表人数。
-	@StructOrder(20)
+	@StructOrder(19)
 	private int	colorbarnum;			    //自己的彩条总数。
-	@StructOrder(21)
+	@StructOrder(20)
 	private long    	deposit;                    //银行存款
-	@StructOrder(22)
+	@StructOrder(21)
 	private long		nk;							//剩余K币(请求者的)
-	@StructOrder(23)
+	@StructOrder(22)
 	private long		nb;							//积分数(请求者的)
-	@StructOrder(24)
+	@StructOrder(23)
 	private int    nchestbonusamount;          //幸运奖池最新金额总数
-	@StructOrder(25)
+	@StructOrder(24)
 	private byte[]			vcbname = new byte[32];		//房间名称
-	@StructOrder(26)
+	@StructOrder(25)
 	private byte[]			vcbtheme = new byte[64];		//房间描述
-	@StructOrder(27)
+	@StructOrder(26)
 	private byte[]			mediaserver = new byte[128];	//房间媒体服务器。
-	@StructOrder(28)
+	@StructOrder(27)
 	private long           nmictime;                   //房间麦时
-	@StructOrder(29)
+	@StructOrder(28)
 	private int           nmiclimit;                  //房间默认上麦几次
-	@StructOrder(30)
+	@StructOrder(29)
 	private int           nmiclimitall;
-	@StructOrder(31)
+	@StructOrder(30)
 	private byte[]          carname = new byte[32];                    //用户座驾名字
 
 	public void setColorbarnum(int colorbarnum) {
@@ -91,7 +91,7 @@ public class JoinRoomResponse {
 	}
 
 	@StructOrder(32)
-	private ByteBuffer 		playerlist = new ByteBuffer();				//管理员列表。变长
+	private ByteBuffer playerlist = new ByteBuffer();				//管理员列表。变长
 
 
 	public int getUserid() {
@@ -183,12 +183,6 @@ public class JoinRoomResponse {
 	}
 	public void setNtype(int ntype) {
 		this.ntype = ntype;
-	}
-	public short getBkgroundid() {
-		return bkgroundid;
-	}
-	public void setBkgroundid(short bkgroundid) {
-		this.bkgroundid = bkgroundid;
 	}
 	public int getReserve1() {
 		return reserve1;

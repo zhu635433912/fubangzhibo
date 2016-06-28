@@ -36,7 +36,7 @@ import java.util.List;
  * 创建时间：2016-05-25 14:22
  * 修改人：dell
  * 修改时间：2016-05-25 14:22
- * 修改备注：
+ * 修改备注：添加礼物的工具类
  */
 public class GiftUtil {
 

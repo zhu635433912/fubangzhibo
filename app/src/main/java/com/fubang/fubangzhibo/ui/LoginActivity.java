@@ -36,6 +36,9 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.tencent.qq.QQ;
 import sample.login.LoginMain;
 
+/**
+ * 登录页面
+ */
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends BaseActivity implements View.OnClickListener, PlatformActionListener {
     @ViewById(R.id.login_qq_image)
@@ -85,8 +88,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         new LoginMain(username,pwd).start(username,pwd);
                     }
                 }).start();
-//                new LoginMain().start(username,pwd);
-                Log.d("123",username+pwd);
+//                Log.d("123",username+pwd);
             }
         });
     }
@@ -147,6 +149,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void loginSuccess(LogonResponse res){
         if (res != null){
             StartUtil.editInfo(this,res.getCalias(),res.getUserid()+"",res.getHeadpic()+"",pwd);
+            StartUtil.editUserInfo(this,res.getNlevel()+"",res.getNdeposit()+"",res.getNk()+"",res.getNb()+"",res.getCidiograph());
             startActivity(MainActivity_.intent(LoginActivity.this).get());
         }
     }

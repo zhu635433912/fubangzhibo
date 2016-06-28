@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/mytest" />
             <option value="$PROJECT_DIR$/oneKeyShare" />
             <option value="$PROJECT_DIR$/shareSDKmainLibs" />
+            <option value="$PROJECT_DIR$/update" />
           </set>
         </option>
         <option name="myModules">
@@ -28,6 +29,7 @@
             <option value="$PROJECT_DIR$/mytest" />
             <option value="$PROJECT_DIR$/oneKeyShare" />
             <option value="$PROJECT_DIR$/shareSDKmainLibs" />
+            <option value="$PROJECT_DIR$/update" />
           </set>
         </option>
       </GradleProjectSettings>

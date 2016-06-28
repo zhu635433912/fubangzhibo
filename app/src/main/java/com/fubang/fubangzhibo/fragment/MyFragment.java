@@ -16,6 +16,7 @@ import com.fubang.fubangzhibo.R;
 import com.fubang.fubangzhibo.adapters.HomeTitleAdapter;
 import com.fubang.fubangzhibo.entities.UserEntity;
 import com.fubang.fubangzhibo.ui.MessageActivity_;
+import com.fubang.fubangzhibo.ui.PersonActivity_;
 import com.fubang.fubangzhibo.ui.PrivilegeActivity_;
 import com.fubang.fubangzhibo.ui.RechargeActivity_;
 import com.fubang.fubangzhibo.ui.SettingActivity_;
@@ -55,7 +56,8 @@ public class MyFragment extends BaseFragment {
     LinearLayout myPrivileges;
     @ViewById(R.id.my_setting)
     LinearLayout mySetting;
-
+    @ViewById(R.id.user_info_message)
+    LinearLayout personLL;
     @Override
     public void before() {
         EventBus.getDefault().register(this);
@@ -91,6 +93,12 @@ public class MyFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(SettingActivity_.intent(getContext()).get());
+            }
+        });
+        personLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(PersonActivity_.intent(getContext()).get());
             }
         });
     }

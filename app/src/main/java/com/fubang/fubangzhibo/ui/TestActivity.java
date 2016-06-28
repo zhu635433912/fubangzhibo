@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -62,7 +64,9 @@ import java.util.List;
 import sample.room.MicNotify;
 import sample.room.RoomMain;
 
-
+/**
+ * 加入房间页面
+ */
 @EActivity(R.layout.activity_test)
 public class TestActivity extends BaseActivity implements AVNotify, MicNotify, View.OnClickListener {
     @ViewById(R.id.linear_container)
@@ -113,21 +117,22 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
     private List<RoomUserInfo> userInfos = new ArrayList<>();
     private RoomUserInfo sendToUser;
     private UserAdapter userAdapter;
-    private Thread runThread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            while (isRunning) {
-                play.start();
-                Log.d("123","chongxingqidong");
-                roomMain.Start(roomId, Integer.parseInt(StartUtil.getUserId(TestActivity.this)), StartUtil.getUserPwd(TestActivity.this), ip, port);
-            }
-        }
-    });;
+//    private Thread runThread = new Thread(new Runnable() {
+//        @Override
+//        public void run() {
+//            while (isRunning) {
+//                play.start();
+//                Log.d("123","chongxingqidong");
+//                roomMain.Start(roomId, Integer.parseInt(StartUtil.getUserId(TestActivity.this)), StartUtil.getUserPwd(TestActivity.this), ip, port);
+//            }
+//        }
+//    });;
     PowerManager powerManager = null;
     PowerManager.WakeLock wakeLock = null;
 
     private String roomIp;
     private App app;
+
 
     @Override
     public void before() {
@@ -158,12 +163,15 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
 //            }
 //        });
         Log.d("123","oncreate---");
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         RoomUserInfo roomUser = new RoomUserInfo();
         roomUser.setUseralias("大厅");
         userInfos.add(roomUser);
-
-        runThread.start();
+        RoomChatMsg joinMsg = new RoomChatMsg();
+        joinMsg.setSrcid(Integer.parseInt(StartUtil.getUserId(this)));
+        joinMsg.setContent("加入了房间");
+        data.add(joinMsg);
+//        runThread.start();
         adapter = new RoomChatAdapter(data,this);
         listView.setAdapter(adapter);
         showWindow();
@@ -393,19 +401,28 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
         super.onResume();
         isRunning = true;
 //        Log.d("123","onResume---");
-//        runThread.start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (isRunning) {
+                    play.start();
+                    Log.d("123", "chongxingqidong");
+                    roomMain.Start(roomId, Integer.parseInt(StartUtil.getUserId(TestActivity.this)), StartUtil.getUserPwd(TestActivity.this), ip, port);
+                }
+            }
+        }).start();
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        isRunning = true;
-        Log.d("123","onRestart---");
-//        runThread.interrupt();
-//        runThread.start();
-//        startActivity(TestActivity_.intent(this)
-//                .extra("roomIp",roomIp).extra("roomId",roomId+"").get());
-    }
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        isRunning = true;
+//        Log.d("123","onRestart---");
+////        runThread.interrupt();
+////        runThread.start();
+////        startActivity(TestActivity_.intent(this)
+////                .extra("roomIp",roomIp).extra("roomId",roomId+"").get());
+//    }
 
 
     protected void onPause() {
@@ -419,6 +436,7 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
                     play.stop();
                     mgr.StopRTPSession();
                     mgr.Uninit();
+                    mgr = null;
                 }
             }
         }).start();
@@ -518,7 +536,6 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
         // TODO Auto-generated method stub
         if(null == mgr) {
                 mgr = new AVModuleMgr();
-//            }
             Log.d("123","mgr-----new--"+mgr);
             StartAV(ip, port, rand, uid);
         }
@@ -536,7 +553,6 @@ public class TestActivity extends BaseActivity implements AVNotify, MicNotify, V
             mgr.Uninit();
             play.stop();
         }
-
         EventBus.getDefault().unregister(this);
     }
 

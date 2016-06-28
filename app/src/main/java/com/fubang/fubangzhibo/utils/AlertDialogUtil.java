@@ -9,6 +9,7 @@ import com.fubang.fubangzhibo.AppConstant;
 import com.zhuyunjian.library.DeviceUtil;
 
 /**
+ * Dialog对话框工具类
  * Created by dell on 2016/4/11.
  */
 public class AlertDialogUtil {

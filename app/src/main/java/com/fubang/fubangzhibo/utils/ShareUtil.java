@@ -7,6 +7,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 /**
+ * 第三方分享工具类
  * Created by dell on 2016/4/11.
  */
 public class ShareUtil {

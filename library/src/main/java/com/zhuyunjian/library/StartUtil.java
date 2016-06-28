@@ -20,6 +20,12 @@ public class StartUtil {
     public static final String USER_NAME = "user_name";
     public static final String USER_ID = "user_id";
     public static final String USER_PWD = "user_pwd";
+    public static final String USER_LEVEL = "user_level";
+    public static final String USER_DEPOSIT = "user_deposit";
+    public static final String USER_KBI = "user_kbi";
+    public static final String USER_SCORE = "user_score";
+    public static final String USER_CIDIOGRAPH = "user_cidiograph";
+    public static final String USER_INFO_OTHER = "user_info_other";
     public static boolean isFirst(Context context){
         SharedPreferences preferences = context.getSharedPreferences(APP_START_FIRST,Context.MODE_PRIVATE);
         boolean isFirst = preferences.getBoolean(APP_START_KEY,true);
@@ -84,5 +90,35 @@ public class StartUtil {
     public static void deleteLogin(Context context){
         SharedPreferences preferences = context.getSharedPreferences(USER_INFO,Context.MODE_PRIVATE);
         preferences.edit().clear().commit();
+    }
+    public static void editUserInfo(Context context, String userLevel, String userDeposit, String userKbi, String userScore, String userCidiograph){
+        SharedPreferences perferences = context.getSharedPreferences(USER_INFO_OTHER,Context.MODE_PRIVATE);
+        perferences.edit().putString(USER_LEVEL,userLevel).putString(USER_DEPOSIT,userDeposit).putString(USER_KBI,userKbi)
+                .putString(USER_SCORE,userScore).putString(USER_CIDIOGRAPH,userCidiograph).commit();
+    }
+    public static String getUserLevel(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(USER_INFO_OTHER,Context.MODE_PRIVATE);
+        String userLevel = preferences.getString(USER_LEVEL,"");
+        return userLevel;
+    }
+    public static String getUserDeposit(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(USER_INFO_OTHER,Context.MODE_PRIVATE);
+        String userLevel = preferences.getString(USER_DEPOSIT,"");
+        return userLevel;
+    }
+    public static String getUserKbi(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(USER_INFO_OTHER,Context.MODE_PRIVATE);
+        String userLevel = preferences.getString(USER_KBI,"");
+        return userLevel;
+    }
+    public static String getUserScore(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(USER_INFO_OTHER,Context.MODE_PRIVATE);
+        String userLevel = preferences.getString(USER_SCORE,"");
+        return userLevel;
+    }
+    public static String getUserCidiograph(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(USER_INFO_OTHER,Context.MODE_PRIVATE);
+        String userLevel = preferences.getString(USER_CIDIOGRAPH,"");
+        return userLevel;
     }
 }

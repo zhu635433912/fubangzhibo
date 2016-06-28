@@ -14,13 +14,10 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.fubang.fubangzhibo.R;
 import com.fubang.fubangzhibo.entities.RoomListEntity;
-import com.fubang.fubangzhibo.ui.RoomActivity_;
-import com.fubang.fubangzhibo.ui.TestActivity;
 import com.fubang.fubangzhibo.ui.TestActivity_;
 import com.zhuyunjian.library.ListBaseAdapter;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * 首页房间列表的适配器

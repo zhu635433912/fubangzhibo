@@ -618,8 +618,8 @@ public class RoomActivity extends BaseActivity implements  MicNotify, RoomHandle
     public void onMic(String ip, int port, int rand, int uid) {
         // TODO Auto-generated method stub
         if(null == mgr) {
-//            mgr = new AVModuleMgr();
-            mgr = App_.getInstance().getMgr();
+            mgr = new AVModuleMgr();
+//            mgr = App_.getInstance().getMgr();
             StartAV(ip, port, rand, uid);
         }
     }

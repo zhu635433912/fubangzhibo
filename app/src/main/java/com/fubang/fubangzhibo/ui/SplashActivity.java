@@ -1,8 +1,5 @@
 package com.fubang.fubangzhibo.ui;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -11,12 +8,14 @@ import android.widget.ImageView;
 
 import com.fubang.fubangzhibo.MainActivity_;
 import com.fubang.fubangzhibo.R;
-import com.google.gson.TypeAdapter;
 import com.zhuyunjian.library.StartUtil;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 启动页面
+ */
 @EActivity(R.layout.activity_splash)
 public class SplashActivity extends BaseActivity {
     @ViewById(R.id.splash_image)

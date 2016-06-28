@@ -20,6 +20,9 @@ import com.zhuyunjian.library.StartUtil;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 设置页面
+ */
 @EActivity(R.layout.activity_setting)
 public class SettingActivity extends BaseActivity {
     @ViewById(R.id.setting_clear_cache)

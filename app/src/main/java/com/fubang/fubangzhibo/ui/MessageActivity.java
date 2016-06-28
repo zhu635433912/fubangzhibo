@@ -10,6 +10,9 @@ import com.fubang.fubangzhibo.R;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 通知页面
+ */
 @EActivity(R.layout.activity_message)
 public class MessageActivity extends BaseActivity {
     @ViewById(R.id.message_back_btn)

@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/mytest/mytest.iml" filepath="$PROJECT_DIR$/mytest/mytest.iml" />
       <module fileurl="file://$PROJECT_DIR$/oneKeyShare/oneKeyShare.iml" filepath="$PROJECT_DIR$/oneKeyShare/oneKeyShare.iml" />
       <module fileurl="file://$PROJECT_DIR$/shareSDKmainLibs/shareSDKmainLibs.iml" filepath="$PROJECT_DIR$/shareSDKmainLibs/shareSDKmainLibs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/update/update.iml" filepath="$PROJECT_DIR$/update/update.iml" />
     </modules>
   </component>
 </project>

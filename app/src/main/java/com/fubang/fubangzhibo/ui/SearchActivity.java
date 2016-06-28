@@ -22,6 +22,9 @@ import org.simple.eventbus.Subscriber;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 搜索页面
+ */
 @EActivity(R.layout.activity_search)
 public class SearchActivity extends BaseActivity implements SearchView.OnQueryTextListener {
     @ViewById(R.id.search_view)
@@ -54,7 +57,7 @@ public class SearchActivity extends BaseActivity implements SearchView.OnQueryTe
         searchText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(RoomActivity_.intent(SearchActivity.this).extra("roomId",searchView.getQuery()).get());
+                startActivity(TestActivity_.intent(SearchActivity.this).extra("roomId",searchView.getQuery()).get());
             }
         });
     }

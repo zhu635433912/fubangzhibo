@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="1"
+        android:id="@+id/billboard_gifttop_number"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="10009"
+        android:id="@+id/billboard_gifttop_name"
+        android:layout_marginLeft="10dp"
+        android:textSize="18sp"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="1154844848"
+        android:textSize="18sp"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:id="@+id/billboard_gifttop_value"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,21 +1,50 @@
 package com.fubang.fubangzhibo.fragment;
 
 
-import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v4.view.ViewPager;
 
+import com.fubang.fubangzhibo.AppConstant;
 import com.fubang.fubangzhibo.R;
+import com.fubang.fubangzhibo.adapters.HomeTitleAdapter;
 
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 直播界面
  * A simple {@link Fragment} subclass.
  */
 @EFragment(R.layout.fragment_live)
-public class LiveFragment extends Fragment {
+public class LiveFragment extends BaseFragment {
+    @ViewById(R.id.billboard_tablayout)
+    TabLayout tabLayout;
+    @ViewById(R.id.billboard_viewpage)
+    ViewPager viewPager;
+    private List<String> titles = new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
 
+
+    @Override
+    public void initView() {
+        for (int i = 0; i < AppConstant.BILLBOARD_TITLE.length; i++) {
+            titles.add(AppConstant.BILLBOARD_TITLE[i]);
+        }
+        fragments.add(RichFragment_.builder().arg(AppConstant.HOME_TYPE,titles.get(0)).build());
+        fragments.add(GiftTopFragment_.builder().arg(AppConstant.HOME_TYPE,titles.get(1)).build());
+        fragments.add(AnchorFragment_.builder().arg(AppConstant.HOME_TYPE,titles.get(2)).build());
+        fragments.add(RichFragment_.builder().arg(AppConstant.HOME_TYPE,titles.get(3)).build());
+    }
+
+    @Override
+    public void initData() {
+        HomeTitleAdapter adapter = new HomeTitleAdapter(getChildFragmentManager(),fragments,titles);
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+    }
 }

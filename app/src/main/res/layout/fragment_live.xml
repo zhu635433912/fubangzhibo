@@ -1,13 +1,39 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context="com.fubang.fubangzhibo.fragment.LiveFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="直播界面" />
-
-</FrameLayout>
+        android:layout_height="50dp">
+        <TextView
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="排行榜"
+            android:textColor="@color/my_text_center"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </RelativeLayout>
+    <View
+        android:background="@color/my_center_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        />
+    <android.support.design.widget.TabLayout
+        android:background="@color/home_tab_backgroud"
+        android:id="@+id/billboard_tablayout"
+        app:tabTextColor="@color/bottom_radio_text"
+        app:tabIndicatorColor="@color/bottom_radio_checked_text"
+        app:tabSelectedTextColor="@color/bottom_radio_checked_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+    <android.support.v4.view.ViewPager
+        android:background="@color/home_tab_backgroud"
+        android:id="@+id/billboard_viewpage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

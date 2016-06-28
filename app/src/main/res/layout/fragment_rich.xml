@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fubang.fubangzhibo.fragment.RichFragment">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:text="排行"
+            android:textColor="@color/home_room_text"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="富豪"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"
+            android:textColor="@color/home_room_text"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="富豪值"
+            android:textSize="20sp"
+            android:textColor="@color/home_room_text"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="钟意人"
+            android:textSize="20sp"
+            android:textColor="@color/home_room_text"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/rich_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</LinearLayout>

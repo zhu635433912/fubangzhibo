@@ -8,6 +8,9 @@ import com.fubang.fubangzhibo.R;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+/**
+ * 特权页面
+ */
 @EActivity(R.layout.activity_privilege)
 public class PrivilegeActivity extends BaseActivity {
 

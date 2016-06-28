@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:keepScreenOn="true"
     tools:context="com.fubang.fubangzhibo.ui.TestActivity">
     <LinearLayout
         android:id="@+id/linear_container"
@@ -46,4 +47,5 @@
     </LinearLayout>
 
     <include layout="@layout/widget_chat_input"/>
+
 </LinearLayout>

@@ -104,7 +104,7 @@ public class MyRoom implements RoomHandler {
 		String str = obj.getMediaserver();
 		String ips[] = str.split(";");
 		if(ips.length > 0) {
-			String s[] = ips[1].split(":");
+			String s[] = ips[0].split(":");
 			if(s.length > 1) {
 				videoIP = s[0];
 				videoPort = Integer.valueOf(s[1]).intValue();

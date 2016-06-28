@@ -36,7 +36,7 @@ import java.util.List;
  * 创建时间：2016-06-17 15:58
  * 修改人：dell
  * 修改时间：2016-06-17 15:58
- * 修改备注：
+ * 修改备注：添加表情的工具类
  */
 public class FaceUtil {
 

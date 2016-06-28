@@ -37,6 +37,7 @@ public class AudioPlay {
 				if (audioTrack != null) {
 					audioTrack.write(head, 0, head.length);
 					audioTrack.flush();
+//					Log.d("123","audiotrack ----head"+head.length);
 				}
 			} catch(Exception e) {
 				System.out.println("onAudio play error:" + e.getMessage());

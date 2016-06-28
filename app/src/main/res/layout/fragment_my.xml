@@ -20,6 +20,7 @@
     android:layout_height="1dp"
     />
     <LinearLayout
+        android:id="@+id/user_info_message"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp">

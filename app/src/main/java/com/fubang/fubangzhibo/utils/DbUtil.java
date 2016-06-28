@@ -9,6 +9,7 @@ import com.fubang.fubangzhibo.dao.RoomListEntityDao;
 import com.fubang.fubangzhibo.entities.RoomListEntity;
 
 /**
+ * 数据库工具类
  * Created by dell on 2016/4/7.
  */
 public class DbUtil {
